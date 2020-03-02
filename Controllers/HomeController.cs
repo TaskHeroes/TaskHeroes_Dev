@@ -25,7 +25,7 @@ namespace TaskHeroes.Controllers
 
         public IActionResult Login()
         {
-            return View();
+            return View("~/Views/Login/Index.cshtml");
         }
 
         public void Search()
