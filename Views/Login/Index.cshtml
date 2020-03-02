@@ -1,0 +1,80 @@
+﻿
+@{
+    ViewData["Title"] = "Login";
+}
+<link rel="stylesheet" href="~/css/Login.css" />
+<script type="text/javascript" src="~/js/Login.js"></script>
+
+<!-- Login as Task Seeker - Employee -->
+<div id="login_employee">
+    <img src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" />
+    <button onclick="document.getElementById('employee').style.display='block'">Login as Task Seeker</button>
+</div>
+
+<!-- Login as Task Offerer - Employeer -->
+<div id="login_employer">
+    <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" />
+    <button onclick="document.getElementById('employer').style.display='block'">Login as Task Offerer</button>
+</div>
+
+<!-- The Modal - Task Seeker - Employee -->
+<div id="employee" class="modal">
+    <span onclick="document.getElementById('employee').style.display='none'"
+          class="close" title="Close Modal">&times;</span>
+
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="">
+        <div class="imgcontainer">
+            <img src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" style="width:40%;">
+        </div>
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('employee').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
+
+<!-- The Modal - Task Offerer - Employeer -->
+<div id="employer" class="modal">
+    <span onclick="document.getElementById('employer').style.display='none'"
+          class="close" title="Close Modal">&times;</span>
+
+    <!-- Modal Content -->
+    <form class="modal-content animate" action="">
+        <div class="imgcontainer">
+            <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" style="width:40%;">
+        </div>
+
+        <div class="container">
+            <label for="uname"><b>Username</b></label>
+            <input type="text" placeholder="Enter Username" name="uname" required>
+
+            <label for="psw"><b>Password</b></label>
+            <input type="password" placeholder="Enter Password" name="psw" required>
+
+            <button type="submit">Login</button>
+            <label>
+                <input type="checkbox" checked="checked" name="remember"> Remember me
+            </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+            <button type="button" onclick="document.getElementById('employer').style.display='none'" class="cancelbtn">Cancel</button>
+            <span class="psw">Forgot <a href="#">password?</a></span>
+        </div>
+    </form>
+</div>
