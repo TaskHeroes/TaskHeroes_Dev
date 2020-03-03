@@ -16,4 +16,8 @@
 
 
 
+  <ItemGroup>
+    <Folder Include="wwwroot\css\Login\" />
+    <Folder Include="wwwroot\js\Login\" />
+  </ItemGroup>
 </Project>

@@ -2,21 +2,26 @@
 @{
     ViewData["Title"] = "Login";
 }
-<link rel="stylesheet" href="~/css/Login.css" />
-<script type="text/javascript" src="~/js/Login.js"></script>
+<link rel="stylesheet" href="~/css/Login/Login.css" />
+<script type="text/javascript" src="~/js/Login/Login.js"></script>
+<script type="text/javascript" src="~/js/Login/Login_EventHandler.js"></script>
 
-<!-- Login as Task Seeker - Employee -->
-<div id="login_employee">
-    <img src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" />
-    <button onclick="document.getElementById('employee').style.display='block'">Login as Task Seeker</button>
+<!-- MAIN DISPLAY FOR LOGIN FORM - SELECT TO LOGIN-->
+<div class="mx-auto">
+    <!-- Login as Task Seeker - Employee -->
+    <div id="login_employee">
+        <img src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" />
+        <button>Login as Task Seeker</button>
+    </div>
+
+    <!-- Login as Task Offerer - Employeer -->
+    <div id="login_employer">
+        <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" />
+        <button>Login as Task Offerer</button>
+    </div>
 </div>
 
-<!-- Login as Task Offerer - Employeer -->
-<div id="login_employer">
-    <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" />
-    <button onclick="document.getElementById('employer').style.display='block'">Login as Task Offerer</button>
-</div>
-
+<!-- MODAL FOR LOGIN - SHOWS ON TOP OF THE SCREEN WHEN LOGIN OPTION IS SELECTED -->
 <!-- The Modal - Task Seeker - Employee -->
 <div id="employee" class="modal">
     <span onclick="document.getElementById('employee').style.display='none'"
@@ -74,7 +79,7 @@
 
         <div class="container" style="background-color:#f1f1f1">
             <button type="button" onclick="document.getElementById('employer').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
+            <span class="psw">Does not have an account yet? <a href="#">Sign Up</a></span>
         </div>
     </form>
 </div>

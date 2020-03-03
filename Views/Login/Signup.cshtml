@@ -1,0 +1,41 @@
+﻿@*
+    Page for Sign Up - Put under Login View so they share the same controller and model
+*@
+@{
+    ViewData["Title"] = "Sign Up";
+}
+<link rel="stylesheet" href="~/css/Login/Signup.css" />
+<script type="text/javascript" src="~/js/Login/Login_EventHandler.js"></script>
+<script type="text/javascript" src="~/js/Login/Login.js"></script>
+
+
+<form action="#" style="border:1px solid #ccc; width: 70%" class="mx-auto">
+    <div class="container">
+        <div class="header">
+            <img src="~/Resources/Images/Login/superhero.png" />
+            <h1>The first step to become a hero</h1>
+        </div>
+
+        <p>Please fill in this form to create an account.</p>
+        <hr>
+
+        <label for="email"><b>Email</b></label>
+        <input type="text" placeholder="Enter Email" name="email" required>
+
+        <label for="urname"><b>Username</b></label>
+        <input type="text" placeholder="Choose a username" name="urname" required>
+
+        <label for="psw"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required>
+
+        <label for="psw-repeat"><b>Repeat Password</b></label>
+        <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
+
+        <p>By creating an account you agree to our <a href="#" style="color:dodgerblue">Terms & Privacy</a>.</p>
+
+        <div class="clearfix">
+            <button type="button" class="cancelbtn">Cancel</button>
+            <button type="submit" class="signupbtn">Sign Up</button>
+        </div>
+    </div>
+</form>

@@ -28,6 +28,11 @@ namespace TaskHeroes.Controllers
             return View("~/Views/Login/Index.cshtml");
         }
 
+        public IActionResult Signup()
+        {
+            return View("~/Views/Login/Signup.cshtml");
+        }
+
         public void Search()
         {
         }
