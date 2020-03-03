@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.EntityFrameworkCore;
+using TaskHeroes.Data;
 
 namespace TaskHeroes
 {
@@ -24,6 +26,11 @@ namespace TaskHeroes
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddDbContext<TaskHeroesDbContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("TaskHeroesDbContext")));
+
+            services.AddScoped<DbContext, TaskHeroesDbContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
