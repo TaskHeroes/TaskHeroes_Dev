@@ -141,9 +141,9 @@ span.psw {
 #login_employee {
     display: block;
     float: left;
-    width: 40%;
+    width: 30%;
 }
 #login_employer {
     float: right;
-    width: 40%;
+    width: 30%;
 }
