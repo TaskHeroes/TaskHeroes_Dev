@@ -2,4 +2,40 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    var profile_image = "";
+    var name = "John Doe";
+    var description = "Testing description. abaesfawefkjasdkfj asdjfasdjfpasodfajsdf";
+    var status = "Active";
+    var user_review = "4.5";
+    var member_since = "02/02/2020";
 }
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <div class="card">
+        <img src=@profile_image alt="John" style="width:100%">
+        <h1>@name</h1>
+        <p class="title">CEO & Founder, Example</p>
+        <p>@description</p>
+        <table>
+            <tr>
+                <td>Status</td>
+                <td>@status</td>
+            </tr>
+            <tr>
+                <td>User Review</td>
+                <td>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                    <span class="fa fa-star"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Member Since</td>
+                <td>@member_since</td>
+            </tr>
+        </table>
+        <p><button>Contact @name</button></p>
+    </div>
