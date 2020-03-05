@@ -3,21 +3,20 @@
     ViewData["Title"] = "Login";
 }
 <link rel="stylesheet" href="~/css/Login/Login.css" />
-<script type="text/javascript" src="~/js/Login/Login.js"></script>
-<script type="text/javascript" src="~/js/Login/Login_EventHandler.js"></script>
+
 
 <!-- MAIN DISPLAY FOR LOGIN FORM - SELECT TO LOGIN-->
 <div class="mx-auto">
     <!-- Login as Task Seeker - Employee -->
-    <div id="login_employee">
-        <img src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" />
-        <button>Login as Task Seeker</button>
+    <div class="login_employee">
+        <img id="eme_img" src="~/Resources/Images/Login/employee_login.png" alt="employee_login" class="avatar" />
+        <button id="eme_btn">Login as Task Seeker</button>
     </div>
 
     <!-- Login as Task Offerer - Employeer -->
-    <div id="login_employer">
-        <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" />
-        <button>Login as Task Offerer</button>
+    <div class="login_employer">
+        <img id="emr_img" src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" />
+        <button id="emr_btn">Login as Task Offerer</button>
     </div>
 </div>
 
@@ -48,7 +47,7 @@
 
         <div class="container" style="background-color:#f1f1f1">
             <button type="button" onclick="document.getElementById('employee').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Forgot <a href="#">password?</a></span>
+            <span class="psw">Don't have an account? @Html.ActionLink("Sign Up", "Signup") for one.</span>
         </div>
     </form>
 </div>
@@ -79,7 +78,10 @@
 
         <div class="container" style="background-color:#f1f1f1">
             <button type="button" onclick="document.getElementById('employer').style.display='none'" class="cancelbtn">Cancel</button>
-            <span class="psw">Does not have an account yet? <a href="#">Sign Up</a></span>
+            <span class="psw">Don't have an account? @Html.ActionLink("Sign Up", "Signup") for one.</span>
         </div>
     </form>
 </div>
+
+<script type="text/javascript" src="~/js/Login/Login.js"></script>
+<script type="text/javascript" src="~/js/Login/Login_EventHandler.js"></script>

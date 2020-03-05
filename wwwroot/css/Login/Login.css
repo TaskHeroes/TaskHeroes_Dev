@@ -1,9 +1,4 @@
-﻿/* Bordered form */
-form {
-    border: 3px solid #f1f1f1;
-}
-
-/* Full-width inputs */
+﻿/* Full-width inputs */
 input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
@@ -14,7 +9,17 @@ input[type=text], input[type=password] {
 }
 
 /* Set a style for all buttons */
-button {
+.modal button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+.mx-auto button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -30,7 +35,7 @@ button {
     }
 
 /* Extra style for the cancel button (red) */
-.cancelbtn {
+.container .cancelbtn {
     width: auto;
     padding: 10px 18px;
     background-color: #f44336;
@@ -91,7 +96,7 @@ span.psw {
     background-color: #fefefe;
     margin: 5px auto; /* 15% from the top and centered */
     border: 1px solid #888;
-    width: 80%; /* Could be more or less, depending on screen size */
+    width: 70%; /* Could be more or less, depending on screen size */
 }
 
 /* The Close Button */
@@ -138,12 +143,16 @@ span.psw {
     }
 }
 
-#login_employee {
+.login_employee {
     display: block;
     float: left;
     width: 30%;
 }
-#login_employer {
+.login_employer {
     float: right;
     width: 30%;
+}
+.imgcontainer{
+    margin:auto;
+    width: 50%;
 }

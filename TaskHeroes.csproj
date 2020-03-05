@@ -19,5 +19,6 @@
   <ItemGroup>
     <Folder Include="wwwroot\css\Login\" />
     <Folder Include="wwwroot\js\Login\" />
+    <Folder Include="Views\UserProfile\" />
   </ItemGroup>
 </Project>

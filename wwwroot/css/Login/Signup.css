@@ -23,7 +23,7 @@ hr {
 }
 
 /* Set a style for all buttons */
-button {
+.clearfix button {
     background-color: #4CAF50;
     color: white;
     padding: 14px 20px;
@@ -39,13 +39,13 @@ button {
     }
 
 /* Extra styles for the cancel button */
-.cancelbtn {
+.clearfix .cancelbtn {
     padding: 14px 20px;
     background-color: #f44336;
 }
 
 /* Float cancel and signup buttons and add an equal width */
-.cancelbtn, .signupbtn {
+.clearfix .cancelbtn, .clearfix .signupbtn {
     float: left;
     width: 50%;
 }
