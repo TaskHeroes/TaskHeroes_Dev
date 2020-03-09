@@ -1,9 +1,8 @@
 ﻿.card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    width: 30%;
-    float: left;
     margin: auto;
     text-align: center;
+    padding: 10px;
 }
 
 .card .title {
@@ -58,9 +57,34 @@
         color: #f8ce0b;
     }
 
+
+/* Layout style */
+.leftcolumn {
+    float: left;
+    width: 25%;
+}
+
+.rightcolumn {
+    float: left;
+    width: 75%;
+    padding-left: 20px;
+}
 /* Style for User Info box */
 .user_info {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    max-width: 60%;
     margin: auto;
+    padding: 10px;
+}
+
+.task_history {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+/* Reponsive Layout */
+@media screen and (max-width: 650px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+        padding: 0;
+    }
 }

@@ -14,6 +14,8 @@
     var field3 = "Sample data for field3";
     var field4 = "Sample data for field4";
     var field5 = "Sample data for field5";
+
+
 }
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -21,62 +23,71 @@
 
     <!-- Hidden fields for values that need to be passed into javascript -->
     <input type="hidden" id="user_review" name="user_review" value=@user_review />
+    <h1>User Profile Page</h1>
+    <div class="leftcolumn">
+        <div class="card">
+            <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
+            <h1>@name</h1>
+            <p class="title">@email</p>
+            <p>@description</p>
+            <table>
+                <tr>
+                    <td>Status</td>
+                    <td>@status</td>
+                </tr>
+                <tr>
+                    <td>User Rating</td>
+                    <td>
+                        <div class="stars-outer">
+                            <div class="stars-inner"></div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Member Since</td>
+                    <td>@member_since</td>
+                </tr>
+            </table>
+            <p><button>Contact @name</button></p>
+            <p><button id="edit_profile_btn">Edit Profile</button></p>
 
-    <div class="card">
-        <img src=@profile_image alt="John" style="width:100%">
-        <h1>@name</h1>
-        <p class="title">@email</p>
-        <p>@description</p>
-        <table>
-            <tr>
-                <td>Status</td>
-                <td>@status</td>
-            </tr>
-            <tr>
-                <td>User Rating</td>
-                <td>
-                    <div class="stars-outer">
-                        <div class="stars-inner"></div>
-                    </div>
-                </td>
-            </tr>
-            <tr>
-                <td>Member Since</td>
-                <td>@member_since</td>
-            </tr>
-        </table>
-        <p><button>Contact @name</button></p>
-        <p><button id="edit_profile_btn">Edit Profile</button></p>
-
-        <p><button id="save" style="display:none;"></button></p>
+            <p><button id="save" style="display:none;"></button></p>
+        </div>
     </div>
+    
+    <div class="rightcolumn">
+        <div class="user_info">
+            <h1>User Info</h1>
+            <table>
+                <tr>
+                    <td>Custom Field 1</td>
+                    <td>@field1</td>
+                </tr>
+                <tr>
+                    <td>Custom Field 2</td>
+                    <td>
+                        <input type="text" value=@field2 style="border:none;" readonly />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Custom Field 3</td>
+                    <td>@field3</td>
+                </tr>
+                <tr>
+                    <td>Custom Field 4</td>
+                    <td>@field4</td>
+                </tr>
+                <tr>
+                    <td>Custom Field 5</td>
+                    <td>@field5</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+    <div class="job_history">
+        <h1>Task History</h1>
 
-    <div class="user_info">
-        <h1>User Info</h1>
-        <table>
-            <tr>
-                <td>Custom Field 1</td>
-                <td>@field1</td>
-            </tr>
-            <tr>
-                <td>Custom Field 2</td>
-                <td>
-                    <input type="text" value=@field2 style="border:none;" readonly />
-                </td>
-            </tr>
-            <tr>
-                <td>Custom Field 3</td>
-                <td>@field3</td>
-            </tr>
-            <tr>
-                <td>Custom Field 4</td>
-                <td>@field4</td>
-            </tr>
-            <tr>
-                <td>Custom Field 5</td>
-                <td>@field5</td>
-            </tr>
-        </table>
     </div>
 
 
