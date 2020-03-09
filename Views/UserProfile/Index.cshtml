@@ -1,21 +1,31 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-    var profile_image = "";
+﻿@{
+    ViewData["Title"] = "UserProfile";
+
+    var profile_image = "~/Resources/Images/UserProfile/UserProfile_Sample.jpg";
     var name = "John Doe";
+    var email = "example@uregina.ca";
     var description = "Testing description. abaesfawefkjasdkfj asdjfasdjfpasodfajsdf";
     var status = "Active";
-    var user_review = "4.5";
+    var user_review = "4";
     var member_since = "02/02/2020";
+
+    var field1 = "Sample data for field1";
+    var field2 = "Sample data for field2";
+    var field3 = "Sample data for field3";
+    var field4 = "Sample data for field4";
+    var field5 = "Sample data for field5";
 }
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="~/css/UserProfile/UserProfile.css"/>
+
+    <!-- Hidden fields for values that need to be passed into javascript -->
+    <input type="hidden" id="user_review" name="user_review" value=@user_review />
 
     <div class="card">
         <img src=@profile_image alt="John" style="width:100%">
         <h1>@name</h1>
-        <p class="title">CEO & Founder, Example</p>
+        <p class="title">@email</p>
         <p>@description</p>
         <table>
             <tr>
@@ -23,13 +33,11 @@
                 <td>@status</td>
             </tr>
             <tr>
-                <td>User Review</td>
+                <td>User Rating</td>
                 <td>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
-                    <span class="fa fa-star"></span>
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
                 </td>
             </tr>
             <tr>
@@ -38,4 +46,39 @@
             </tr>
         </table>
         <p><button>Contact @name</button></p>
+        <p><button id="edit_profile_btn">Edit Profile</button></p>
+
+        <p><button id="save" style="display:none;"></button></p>
     </div>
+
+    <div class="user_info">
+        <h1>User Info</h1>
+        <table>
+            <tr>
+                <td>Custom Field 1</td>
+                <td>@field1</td>
+            </tr>
+            <tr>
+                <td>Custom Field 2</td>
+                <td>
+                    <input type="text" value=@field2 style="border:none;" readonly />
+                </td>
+            </tr>
+            <tr>
+                <td>Custom Field 3</td>
+                <td>@field3</td>
+            </tr>
+            <tr>
+                <td>Custom Field 4</td>
+                <td>@field4</td>
+            </tr>
+            <tr>
+                <td>Custom Field 5</td>
+                <td>@field5</td>
+            </tr>
+        </table>
+    </div>
+
+
+<script type="text/javascript" src="~/js/UserProfile/UserProfile.js"></script>
+<script type="text/javascript" src="~/js/UserProfile/UserProfile_EventHandler.js"></script>
