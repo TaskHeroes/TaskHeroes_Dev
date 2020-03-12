@@ -9,13 +9,11 @@
     var user_review = "4";
     var member_since = "02/02/2020";
 
-    var field1 = "Sample data for field1";
-    var field2 = "Sample data for field2";
-    var field3 = "Sample data for field3";
-    var field4 = "Sample data for field4";
-    var field5 = "Sample data for field5";
-
-
+    var username = "username123";
+    var firstname = "John";
+    var lastname = "Doe";
+    var city = "Regina";
+    var province = "SK";
 }
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,7 +26,6 @@
         <div class="card">
             <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
             <h1>@name</h1>
-            <p class="title">@email</p>
             <p>@description</p>
             <table>
                 <tr>
@@ -58,30 +55,54 @@
     <div class="rightcolumn">
         <div class="user_info">
             <h1>User Info</h1>
-            <table>
-                <tr>
-                    <td>Custom Field 1</td>
-                    <td>@field1</td>
-                </tr>
-                <tr>
-                    <td>Custom Field 2</td>
-                    <td>
-                        <input type="text" value=@field2 style="border:none;" readonly />
-                    </td>
-                </tr>
-                <tr>
-                    <td>Custom Field 3</td>
-                    <td>@field3</td>
-                </tr>
-                <tr>
-                    <td>Custom Field 4</td>
-                    <td>@field4</td>
-                </tr>
-                <tr>
-                    <td>Custom Field 5</td>
-                    <td>@field5</td>
-                </tr>
-            </table>
+            <form id="user_info_form">
+                <div class="form-group row">
+                    <label for="username" class="col-sm-2 col-form-label">Username</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="username" value=@username>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="email" class="col-sm-2 col-form-label">Email</label>
+                    <div class="col-sm-10">
+                        <input type="email" class="form-control" id="email" value=@email>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="fname" value=@firstname>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="lname" value=@lastname>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="city" class="col-sm-2 col-form-label">City</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="city" value=@city>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="province" class="col-sm-2 col-form-label">Province</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="province" value=@province>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button id="update_profile_btn" class="btn btn-primary">Update Profile</button>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-sm-10">
+                        <button id="save_btn" type="submit" class="btn btn-primary">Save</button>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
     
