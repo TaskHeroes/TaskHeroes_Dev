@@ -1,4 +1,4 @@
-﻿
+﻿@model LoginModel
 @{
     ViewData["Title"] = "Login";
 }
@@ -27,17 +27,17 @@
           class="close" title="Close Modal">&times;</span>
 
     <!-- Modal Content -->
-    <form class="modal-content animate" action="">
+    <form class="modal-content animate" asp-controller="Login" asp-action="LoginForTaskSeeker" method="post">
         <div class="imgcontainer">
             <img src="~/Resources/Images/Login/employer_login.png" alt="employee_login" class="avatar" style="width:40%;">
         </div>
 
         <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input asp-for="Username" type="text" placeholder="Enter Username" required>
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input asp-for="Password" type="password" placeholder="Enter Password" required>
 
             <button type="submit">Login</button>
             <label>
@@ -58,17 +58,17 @@
           class="close" title="Close Modal">&times;</span>
 
     <!-- Modal Content -->
-    <form class="modal-content animate" action="">
+    <form class="modal-content animate"  asp-controller="Login" asp-action="LoginForTaskOfferer" method="post">
         <div class="imgcontainer">
             <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" style="width:40%;">
         </div>
 
         <div class="container">
             <label for="uname"><b>Username</b></label>
-            <input type="text" placeholder="Enter Username" name="uname" required>
+            <input asp-for="Username" type="text" placeholder="Enter Username" required>
 
             <label for="psw"><b>Password</b></label>
-            <input type="password" placeholder="Enter Password" name="psw" required>
+            <input asp-for="Password" type="password" placeholder="Enter Password" required>
 
             <button type="submit">Login</button>
             <label>

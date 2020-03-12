@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TaskHeroes.Data;
 using TaskHeroes.Models;
 
 namespace TaskHeroes.Controllers
@@ -12,25 +13,31 @@ namespace TaskHeroes.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly TaskHeroesDbContext _context;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, TaskHeroesDbContext context)
         {
             _logger = logger;
+            _context = context;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var modelForView = new HomeModel();
+            modelForView.ListOfPostings = _context.Postings.ToList();
+            modelForView.ListOfUsers = _context.Users.ToList();
+
+            return View(modelForView);
         }
 
         public IActionResult Login()
         {
-            return View("~/Views/Login/Index.cshtml");
+            return RedirectToAction("Index", "Login");
         }
 
         public IActionResult Signup()
         {
-            return View("~/Views/Login/Signup.cshtml");
+            return RedirectToAction("SignUp", "Login");
         }
 
         public void Search()

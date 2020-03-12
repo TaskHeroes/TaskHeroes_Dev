@@ -27,6 +27,8 @@ namespace TaskHeroes
         {
             services.AddControllersWithViews();
 
+            services.AddSession();
+
             services.AddDbContext<TaskHeroesDbContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TaskHeroesDbContext")));
 
@@ -52,6 +54,8 @@ namespace TaskHeroes
             app.UseRouting();
 
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

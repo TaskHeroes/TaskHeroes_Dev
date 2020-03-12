@@ -4,90 +4,45 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.Models;
 
 namespace TaskHeroes.Controllers
 {
     public class LoginController : Controller
     {
-        // GET: Login
         public ActionResult Index()
         {
             return View();
         }
 
-        // GET: Login/Details/5
-        public ActionResult Details(int id)
+
+        public ActionResult SignUp()
         {
             return View();
         }
 
-        // GET: Login/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Login/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult LoginForTaskSeeker(LoginModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            HttpContext.Session.SetInt32("userid", 123);
+            HttpContext.Session.SetString("username", model.Username);
+            return RedirectToAction("Index", "Home");
         }
 
-        // GET: Login/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult LoginForTaskOfferer(LoginModel model)
         {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            HttpContext.Session.SetInt32("userid", 123);
+            HttpContext.Session.SetString("username", model.Username);
+            return RedirectToAction("Index", "Home");
         }
 
-        // GET: Login/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Login/Delete/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult SubmitSignUp(SignUpModel model)
         {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            var testId = HttpContext.Session.GetInt32("userid");
+            var testUsername = HttpContext.Session.GetString("username");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿@*
+﻿@model SignUpModel
+@*
     Page for Sign Up - Put under Login View so they share the same controller and model
 *@
 @{
@@ -6,7 +7,7 @@
 }
 <link rel="stylesheet" href="~/css/Login/Signup.css" />
 
-<form action="#" style="border:1px solid #ccc; width: 70%" class="mx-auto">
+<form style="border:1px solid #ccc; width: 70%" class="mx-auto" asp-controller="Login" asp-action="SubmitSignUp" method="post">
     <div class="container">
         <div class="header">
             <img src="~/Resources/Images/Login/superhero.png" />
@@ -17,13 +18,13 @@
         <hr>
 
         <label for="email"><b>Email</b></label>
-        <input type="text" placeholder="Enter Email" name="email" required>
+        <input asp-for="Email" type="text" placeholder="Enter Email" name="email" required>
 
         <label for="urname"><b>Username</b></label>
-        <input type="text" placeholder="Choose a username" name="urname" required>
+        <input asp-for="Username" type="text" placeholder="Choose a username" required>
 
         <label for="psw"><b>Password</b></label>
-        <input type="password" placeholder="Enter Password" name="psw" required>
+        <input asp-for="Password" type="password" placeholder="Enter Password" required>
 
         <label for="psw-repeat"><b>Repeat Password</b></label>
         <input type="password" placeholder="Repeat Password" name="psw-repeat" required>
