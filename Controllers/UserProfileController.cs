@@ -24,19 +24,20 @@ namespace TaskHeroes.Controllers
         public ActionResult Index()
         {
             // Pull up the information of the logged in user
-            var user = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
+            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
 
             var userModel = new UserProfileModel();
-            userModel.UserId = user.Id;
-            userModel.Username = user.Username;
-            userModel.Password = user.Password;
-            userModel.FirstName = user.FirstName;
-            userModel.LastName = user.LastName;
-            userModel.City = user.City;
-            userModel.Province = user.Province;
-            userModel.Description = user.Description;
-
-            // TODO: Grab and map Rating, Task History and List of offered postings as well!!
+            userModel.UserId = userFullData.User.Id;
+            userModel.Username = userFullData.User.Username;
+            userModel.Password = userFullData.User.Password;
+            userModel.FirstName = userFullData.User.FirstName;
+            userModel.LastName = userFullData.User.LastName;
+            userModel.City = userFullData.User.City;
+            userModel.Province = userFullData.User.Province;
+            userModel.Description = userFullData.User.Description;
+            userModel.Rating = userFullData.Rating;
+            userModel.TaskHistory = userFullData.TaskHistory;
+            userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
 
             return View(userModel);
         }
