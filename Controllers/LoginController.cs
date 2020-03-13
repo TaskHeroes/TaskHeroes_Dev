@@ -43,7 +43,7 @@ namespace TaskHeroes.Controllers
 
             if (existingUser != null)
             {
-                HttpContext.Session.SetInt32("userid", 123);
+                HttpContext.Session.SetInt32("userid", existingUser.Id);
                 HttpContext.Session.SetString("username", model.Username);
                 HttpContext.Session.SetInt32("usertype", 1); // 1= Task Seeker, 2 = Task Offerer
 
@@ -63,7 +63,7 @@ namespace TaskHeroes.Controllers
 
             if (existingUser != null)
             {
-                HttpContext.Session.SetInt32("userid", 123);
+                HttpContext.Session.SetInt32("userid", existingUser.Id);
                 HttpContext.Session.SetString("username", model.Username);
                 HttpContext.Session.SetInt32("usertype", 2); // 1= Task Seeker, 2 = Task Offerer
 
