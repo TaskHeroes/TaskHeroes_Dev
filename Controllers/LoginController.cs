@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.CQS.Commands;
+using TaskHeroes.CQS.Queries;
+using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
 using TaskHeroes.Models;
 
@@ -11,10 +14,15 @@ namespace TaskHeroes.Controllers
 {
     public class LoginController : Controller
     {
-        private readonly TaskHeroesDbContext _context;
-        public LoginController(TaskHeroesDbContext context)
+        private readonly IQueryHandler<GetUserByUsernameAndPasswordQuery, User> _getUserByUsernameAndPasswordQueryHandler;
+        private readonly ICommandHandler<SignUpInsertNewUserCommand> _signUpInsertNewUserCommandHandler;
+
+        public LoginController(
+            IQueryHandler<GetUserByUsernameAndPasswordQuery, User> getUserByUsernameAndPasswordQueryHandler,
+            ICommandHandler<SignUpInsertNewUserCommand> signUpInsertNewUserCommandHandler)
         {
-            _context = context;
+            _getUserByUsernameAndPasswordQueryHandler = getUserByUsernameAndPasswordQueryHandler;
+            _signUpInsertNewUserCommandHandler = signUpInsertNewUserCommandHandler;
         }
 
         public ActionResult Index()
@@ -31,7 +39,7 @@ namespace TaskHeroes.Controllers
         [HttpPost]
         public ActionResult LoginForTaskSeeker(LoginModel model)
         {
-            var existingUser = _context.Users.FirstOrDefault(user => user.Username == model.Username && user.Password == model.Password);
+            var existingUser = _getUserByUsernameAndPasswordQueryHandler.Handle(new GetUserByUsernameAndPasswordQuery(model.Username, model.Password));
 
             if (existingUser != null)
             {
@@ -51,7 +59,7 @@ namespace TaskHeroes.Controllers
         [HttpPost]
         public ActionResult LoginForTaskOfferer(LoginModel model)
         {
-            var existingUser = _context.Users.FirstOrDefault(user => user.Username == model.Username && user.Password == model.Password);
+            var existingUser = _getUserByUsernameAndPasswordQueryHandler.Handle(new GetUserByUsernameAndPasswordQuery(model.Username, model.Password));
 
             if (existingUser != null)
             {
@@ -75,10 +83,8 @@ namespace TaskHeroes.Controllers
             userForInsert.Email = model.Email;
             userForInsert.Username = model.Username;
             userForInsert.Password = model.Password;
-            userForInsert.Id = _context.Users.Any() ? _context.Users.Max(x => x.Id) + 1 : 1;
 
-            _context.Users.Add(userForInsert);
-            _context.SaveChanges();
+            _signUpInsertNewUserCommandHandler.Handle(new SignUpInsertNewUserCommand(userForInsert));
 
             return RedirectToAction("Index", "Home");
         }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TaskHeroes.CQS.Queries;
@@ -15,22 +13,20 @@ namespace TaskHeroes.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> _queryHandler;
+        private readonly IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> _getListsOfPostingsAndUsersQueryHandler;
 
-        public HomeController(ILogger<HomeController> logger, IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> queryHandler)
+        public HomeController(ILogger<HomeController> logger, IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> getListsOfPostingsAndUsersQueryHandler)
         {
             _logger = logger;
-            _queryHandler = queryHandler;
+            _getListsOfPostingsAndUsersQueryHandler = getListsOfPostingsAndUsersQueryHandler;
         }
 
         public IActionResult Index()
         {
             var modelForView = new HomeModel();
-
-            var tupleThing = _queryHandler.Handle(new GetListsOfPostingsAndUsersQuery());
-
-            modelForView.ListOfPostings = tupleThing.Item1;
-            modelForView.ListOfUsers = tupleThing.Item2;
+            var queryResult = _getListsOfPostingsAndUsersQueryHandler.Handle(new GetListsOfPostingsAndUsersQuery());
+            modelForView.ListOfPostings = queryResult.Item1;
+            modelForView.ListOfUsers = queryResult.Item2;
 
             return View(modelForView);
         }

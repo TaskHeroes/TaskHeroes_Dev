@@ -8,6 +8,6 @@ namespace TaskHeroes.CQSInterfaces
 	public interface ICommandHandler<TCommand> 
 		where TCommand: ICommand  
 	{  
-		void HandleAsync(ICommand command);
+		void Handle(TCommand command);
 	} 
 }
