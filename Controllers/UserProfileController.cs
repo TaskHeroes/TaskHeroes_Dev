@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskHeroes.CQS.Queries;
+using TaskHeroes.CQS.TransportObjects;
 using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
 using TaskHeroes.Models;
@@ -13,8 +14,8 @@ namespace TaskHeroes.Controllers
 {
     public class UserProfileController : Controller
     {
-        private readonly IQueryHandler<GetUserByUserIdQuery, User> _getUserByUserIdQueryHandler;
-        public UserProfileController(IQueryHandler<GetUserByUserIdQuery, User> getUserByUserIdQueryHandler)
+        private readonly IQueryHandler<GetUserDataByUserIdQuery, UserFullData> _getUserByUserIdQueryHandler;
+        public UserProfileController(IQueryHandler<GetUserDataByUserIdQuery, UserFullData> getUserByUserIdQueryHandler)
         {
             _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
         }
@@ -23,7 +24,7 @@ namespace TaskHeroes.Controllers
         public ActionResult Index()
         {
             // Pull up the information of the logged in user
-            var user = _getUserByUserIdQueryHandler.Handle(new GetUserByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
+            var user = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
 
             var userModel = new UserProfileModel();
             userModel.UserId = user.Id;
