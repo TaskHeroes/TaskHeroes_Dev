@@ -4,28 +4,40 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.CQS.Queries;
+using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
+using TaskHeroes.Models;
 
 namespace TaskHeroes.Controllers
 {
     public class UserProfileController : Controller
     {
-        private readonly TaskHeroesDbContext _context;
-        public UserProfileController(TaskHeroesDbContext context)
+        private readonly IQueryHandler<GetUserByUserIdQuery, User> _getUserByUserIdQueryHandler;
+        public UserProfileController(IQueryHandler<GetUserByUserIdQuery, User> getUserByUserIdQueryHandler)
         {
-            _context = context;
+            _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
         }
 
         // GET: UserProfile
         public ActionResult Index()
         {
             // Pull up the information of the logged in user
-            var userId = HttpContext.Session.GetInt32("userid");
-            var username = HttpContext.Session.GetString("username");
+            var user = _getUserByUserIdQueryHandler.Handle(new GetUserByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
 
+            var userModel = new UserProfileModel();
+            userModel.UserId = user.Id;
+            userModel.Username = user.Username;
+            userModel.Password = user.Password;
+            userModel.FirstName = user.FirstName;
+            userModel.LastName = user.LastName;
+            userModel.City = user.City;
+            userModel.Province = user.Province;
+            userModel.Description = user.Description;
 
+            // TODO: Grab and map Rating, Task History and List of offered postings as well!!
 
-            return View();
+            return View(userModel);
         }
 
         // GET: UserProfile/Details/5
