@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.CQS.Commands;
 using TaskHeroes.CQS.Queries;
 using TaskHeroes.CQS.TransportObjects;
 using TaskHeroes.CQSInterfaces;
@@ -15,9 +16,13 @@ namespace TaskHeroes.Controllers
     public class UserProfileController : Controller
     {
         private readonly IQueryHandler<GetUserDataByUserIdQuery, UserFullData> _getUserByUserIdQueryHandler;
-        public UserProfileController(IQueryHandler<GetUserDataByUserIdQuery, UserFullData> getUserByUserIdQueryHandler)
+        private readonly ICommandHandler<EditUserProfileCommand> _editUserProfileCommandHandler;
+        public UserProfileController(
+            IQueryHandler<GetUserDataByUserIdQuery, UserFullData> getUserByUserIdQueryHandler,
+            ICommandHandler<EditUserProfileCommand> editUserProfileCommandHandler)
         {
             _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
+            _editUserProfileCommandHandler = editUserProfileCommandHandler;
         }
 
         // GET: UserProfile
@@ -42,79 +47,11 @@ namespace TaskHeroes.Controllers
             return View(userModel);
         }
 
-        // GET: UserProfile/Details/5
-        public ActionResult Details(int id)
+        public ActionResult EditUserProfile(UserProfileModel model)
         {
-            return View();
-        }
+            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(model.UserId, model.Username, model.Password, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
 
-        // GET: UserProfile/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: UserProfile/Create
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserProfile/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: UserProfile/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: UserProfile/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: UserProfile/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return Index();
         }
     }
 }
