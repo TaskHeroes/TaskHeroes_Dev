@@ -4,14 +4,27 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.Data;
 
 namespace TaskHeroes.Controllers
 {
     public class UserProfileController : Controller
     {
+        private readonly TaskHeroesDbContext _context;
+        public UserProfileController(TaskHeroesDbContext context)
+        {
+            _context = context;
+        }
+
         // GET: UserProfile
         public ActionResult Index()
         {
+            // Pull up the information of the logged in user
+            var userId = HttpContext.Session.GetInt32("userid");
+            var username = HttpContext.Session.GetString("username");
+
+
+
             return View();
         }
 

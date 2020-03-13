@@ -5,6 +5,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using TaskHeroes.CQS.Queries;
+using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
 using TaskHeroes.Models;
 
@@ -13,19 +15,22 @@ namespace TaskHeroes.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly TaskHeroesDbContext _context;
+        private readonly IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> _queryHandler;
 
-        public HomeController(ILogger<HomeController> logger, TaskHeroesDbContext context)
+        public HomeController(ILogger<HomeController> logger, IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> queryHandler)
         {
             _logger = logger;
-            _context = context;
+            _queryHandler = queryHandler;
         }
 
         public IActionResult Index()
         {
             var modelForView = new HomeModel();
-            modelForView.ListOfPostings = _context.Postings.ToList();
-            modelForView.ListOfUsers = _context.Users.ToList();
+
+            var tupleThing = _queryHandler.Handle(new GetListsOfPostingsAndUsersQuery());
+
+            modelForView.ListOfPostings = tupleThing.Item1;
+            modelForView.ListOfUsers = tupleThing.Item2;
 
             return View(modelForView);
         }
