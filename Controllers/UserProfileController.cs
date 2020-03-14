@@ -24,6 +24,10 @@ namespace TaskHeroes.Controllers
             _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
             _editUserProfileCommandHandler = editUserProfileCommandHandler;
         }
+        public ActionResult UserCard()
+        {
+            return View();
+        }
 
         // GET: UserProfile
         public ActionResult Index()

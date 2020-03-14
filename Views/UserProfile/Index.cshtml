@@ -2,11 +2,10 @@
 @{
     ViewData["Title"] = "UserProfile";
 
-    var profile_image = "~/Resources/Images/UserProfile/UserProfile_Sample.jpg";
+    var profile_image = "~/Resources/Images/UserProfile/profile_picture_3.jpg";
     var name = "John Doe";
     var email = "example@uregina.ca";
-    var description = "Testing description. abaesfawefkjasdkfj asdjfasdjfpasodfajsdf";
-    var status = "Active";
+    var description = "This is a sample user description, which can be used as a bio on his/her user detail page";
     var user_review = "4";
     var member_since = "02/02/2020";
 
@@ -15,6 +14,9 @@
     var lastname = "Doe";
     var city = "Regina";
     var province = "SK";
+
+    var task_history_1 = "Task ID 00001";
+    var task_history_2 = "Task ID 00002";
 }
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -27,29 +29,31 @@
         <div class="card">
             <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
             <h1>@name</h1>
-            <p>@description</p>
-            <table>
-                <tr>
-                    <td>Status</td>
-                    <td>@status</td>
-                </tr>
-                <tr>
-                    <td>User Rating</td>
-                    <td>
+            <form id="user_card_form">
+                <div class="form-group mx-auto row margin-bottom">
+                    <textarea id="description" rows="4" readonly>
+                        @description
+                    </textarea>
+                </div>
+                <div class="form-group row mx-auto margin-bottom">
+                    <label for="user_rating" class="col-form-label">User Rating</label>
+                    <div class="col-sm-7">
                         <div class="stars-outer">
                             <div class="stars-inner"></div>
                         </div>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Member Since</td>
-                    <td>@member_since</td>
-                </tr>
-            </table>
-            <p><button>Contact @name</button></p>
-            <p><button id="edit_profile_btn">Edit Profile</button></p>
+                    </div>
+                </div>
+                <div class="form-group row mx-auto">
+                    <label for="member_since" class="col-form-label">Member Since</label>
+                    <div class="col-sm-7">
+                        <input type="datetime" class="form-control-plaintext" id="member_since" value=@member_since>
+                    </div>
+                </div>
 
-            <p><button id="save" style="display:none;"></button></p>
+                <p><button id="contact_btn">Contact @name</button></p>
+                <p><button id="edit_profile_btn">Edit Profile</button></p>
+                <p><button type="submit" id="save_edit_btn">Save</button></p>
+            </form>
         </div>
     </div>
     
@@ -57,45 +61,41 @@
         <div class="user_info">
             <h1>User Info</h1>
             <form id="user_info_form">
-                <div class="form-group row">
+                <div class="form-group row margin-bottom">
                     <label for="username" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="username" value=@username>
+                        <input type="text" class="form-control-plaintext" id="username" value=@username>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row margin-bottom">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" value=@email>
+                        <input type="email" class="form-control-plaintext" id="email" value=@email>
                     </div>
                 </div>
-                <div class="form-group row">
+
+                <div class="form-group row margin-bottom">
                     <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="fname" value=@firstname>
+                        <input type="text" class="form-control-plaintext" id="fname" value=@firstname>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row margin-bottom">
                     <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="lname" value=@lastname>
+                        <input type="text" class="form-control-plaintext" id="lname" value=@lastname>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row margin-bottom">
                     <label for="city" class="col-sm-2 col-form-label">City</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="city" value=@city>
+                        <input type="text" class="form-control-plaintext" id="city" value=@city>
                     </div>
                 </div>
-                <div class="form-group row">
+                <div class="form-group row margin-bottom">
                     <label for="province" class="col-sm-2 col-form-label">Province</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="province" value=@province>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button id="update_profile_btn" class="btn btn-primary">Update Profile</button>
+                        <input type="text" class="form-control-plaintext" id="province" value=@province>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -107,10 +107,40 @@
         </div>
     </div>
     
-    <div class="job_history">
-        <h1>Task History</h1>
-
+    <div class="rightcolumn">
+        <div class="job_history user_info">
+            <h1>Task History</h1>
+            <ul class="list-group">
+                <a href="">
+                    <li class="list-group-item">
+                        <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                        @task_history_1
+                    </li>
+                </a>
+                <li class="list-group-item">
+                    <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                    @task_history_2
+                </li>
+            </ul>
+        </div>
     </div>
+
+    <div class="rightcolumn">
+        <div class="posting_history user_info">
+            <h1>Posting History</h1>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <img src="~/Resources/Images/UserProfile/post_history.png" alt="task history icon" />
+                    @task_history_1
+                </li>
+                <li class="list-group-item">
+                    <img src="~/Resources/Images/UserProfile/post_history.png" alt="task history icon" />
+                    @task_history_2
+                </li>
+            </ul>
+        </div>
+    </div>
+    
 
 
 <script type="text/javascript" src="~/js/UserProfile/UserProfile.js"></script>

@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewData["Title"] = "UserCard";
+
+    var profile_image = "~/Resources/Images/UserProfile/profile_picture_2.jpg";
+    var name = "Sample User";
+    var email = "example@uregina.ca";
+    var description = "Testing description. abaesfawefkjasdkfj asdjfasdjfpasodfajsdf";
+    var status = "Active";
+    var user_review = "4";
+    var member_since = "02/02/2020";
+}
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/UserProfile/UserProfile.css" />
+
+<!-- Hidden fields for values that need to be passed into javascript -->
+<input type="hidden" id="user_review" name="user_review" value=@user_review />
+<div class="user_card mx-auto">
+    <div class="card">
+        <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
+        <h1>@name</h1>
+        <form id="user_card_form">
+            <div class="form-group mx-auto row margin-bottom">
+                <textarea id="description" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' readonly>
+                        @description
+                </textarea>
+            </div>
+            <div class="form-group row mx-auto margin-bottom">
+                <label for="user_rating" class="col-form-label">User Rating</label>
+                <div class="col-sm-7">
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mx-auto">
+                <label for="member_since" class="col-form-label">Member Since</label>
+                <div class="col-sm-7">
+                    <input type="datetime" class="form-control-plaintext" id="member_since" value=@member_since>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script type="text/javascript" src="~/js/UserProfile/UserProfile.js"></script>
+<script type="text/javascript" src="~/js/UserProfile/UserProfile_EventHandler.js"></script>

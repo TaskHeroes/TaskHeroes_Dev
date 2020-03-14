@@ -1,0 +1,44 @@
+﻿.box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+    padding: 10px;
+}
+.header img {
+    float: left;
+    width: 5%;
+}
+/* Layout style */
+.leftcolumn {
+    float: left;
+    width: 25%;
+    height: 100%;
+}
+
+.rightcolumn {
+    float: right;
+    width: 70%;
+    padding-left: 5%;
+    margin-bottom: 20px;
+}
+
+.gallery_container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+}
+
+/*styling for form*/
+.margin-bottom {
+    margin-bottom: 1px;
+}
+
+.box button {
+    width: 100%;
+}
+
+.task_card{
+    width: 50%;
+}
+
+.task_create{
+    width: 80%;
+}
