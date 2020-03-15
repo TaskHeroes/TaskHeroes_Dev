@@ -24,6 +24,22 @@ namespace TaskHeroes.Controllers
             _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
             _editUserProfileCommandHandler = editUserProfileCommandHandler;
         }
+
+        // GET: UserProfile
+        public ActionResult Index()
+        {
+            return UserDetails(HttpContext.Session.GetInt32("userid").Value);
+        }
+
+        public ActionResult EditUserProfile(UserProfileModel model)
+        {
+            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(model.UserId, model.Username, model.Password, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
+
+            return Index();
+        }
+
+        // Endpoint: /UserProfile/UserCard?id=1
+        // TO USE: asp-controller="UserProfile" asp-action="UserCard" asp-route-id="@item.Id"
         public ActionResult UserCard(int id)
         {
             // Pull up the information of the logged in user
@@ -43,15 +59,17 @@ namespace TaskHeroes.Controllers
             userModel.TaskHistory = userFullData.TaskHistory;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
+            userModel.AllowEditProfile = false;
 
             return View(userModel);
         }
 
-        // GET: UserProfile
-        public ActionResult Index()
+        // Endpoint: /UserProfile/UserDetails?id=1
+        // TO USE: asp-controller="UserProfile" asp-action="UserDetails" asp-route-id="@item.Id"
+        public ActionResult UserDetails(int id)
         {
             // Pull up the information of the logged in user
-            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
+            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(id));
 
             var userModel = new UserProfileModel();
             userModel.UserId = userFullData.User.Id;
@@ -67,15 +85,9 @@ namespace TaskHeroes.Controllers
             userModel.TaskHistory = userFullData.TaskHistory;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
+            userModel.AllowEditProfile = HttpContext.Session.GetInt32("userid").HasValue && id == HttpContext.Session.GetInt32("userid").Value;
 
             return View(userModel);
-        }
-
-        public ActionResult EditUserProfile(UserProfileModel model)
-        {
-            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(model.UserId, model.Username, model.Password, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
-
-            return Index();
         }
     }
 }

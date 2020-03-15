@@ -39,8 +39,12 @@
                 </div>
 
                 <p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
-                <p><button id="edit_profile_btn">Edit Profile</button></p>
-                <p><button type="submit" id="save_edit_btn">Save</button></p>
+
+                @if (Model.AllowEditProfile)
+                {
+                    <p><button id="edit_profile_btn">Edit Profile</button></p>
+                    <p><button type="submit" id="save_edit_btn">Save</button></p>
+                }
             </form>
         </div>
     </div>
