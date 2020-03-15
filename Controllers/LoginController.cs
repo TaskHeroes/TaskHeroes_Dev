@@ -86,7 +86,7 @@ namespace TaskHeroes.Controllers
 
             _signUpInsertNewUserCommandHandler.Handle(new SignUpInsertNewUserCommand(userForInsert));
 
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index", "Login");
         }
     }
 }

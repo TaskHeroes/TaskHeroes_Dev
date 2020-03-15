@@ -24,19 +24,14 @@ namespace TaskHeroes.Controllers
             _getUserByUserIdQueryHandler = getUserByUserIdQueryHandler;
             _editUserProfileCommandHandler = editUserProfileCommandHandler;
         }
-        public ActionResult UserCard()
-        {
-            return View();
-        }
-
-        // GET: UserProfile
-        public ActionResult Index()
+        public ActionResult UserCard(int id)
         {
             // Pull up the information of the logged in user
-            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
+            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(id));
 
             var userModel = new UserProfileModel();
             userModel.UserId = userFullData.User.Id;
+            userModel.Email = userFullData.User.Email;
             userModel.Username = userFullData.User.Username;
             userModel.Password = userFullData.User.Password;
             userModel.FirstName = userFullData.User.FirstName;
@@ -47,6 +42,31 @@ namespace TaskHeroes.Controllers
             userModel.Rating = userFullData.Rating;
             userModel.TaskHistory = userFullData.TaskHistory;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
+            userModel.DateCreated = userFullData.User.DateCreated;
+
+            return View(userModel);
+        }
+
+        // GET: UserProfile
+        public ActionResult Index()
+        {
+            // Pull up the information of the logged in user
+            var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(HttpContext.Session.GetInt32("userid").Value));
+
+            var userModel = new UserProfileModel();
+            userModel.UserId = userFullData.User.Id;
+            userModel.Email = userFullData.User.Email;
+            userModel.Username = userFullData.User.Username;
+            userModel.Password = userFullData.User.Password;
+            userModel.FirstName = userFullData.User.FirstName;
+            userModel.LastName = userFullData.User.LastName;
+            userModel.City = userFullData.User.City;
+            userModel.Province = userFullData.User.Province;
+            userModel.Description = userFullData.User.Description;
+            userModel.Rating = userFullData.Rating;
+            userModel.TaskHistory = userFullData.TaskHistory;
+            userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
+            userModel.DateCreated = userFullData.User.DateCreated;
 
             return View(userModel);
         }

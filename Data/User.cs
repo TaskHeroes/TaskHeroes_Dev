@@ -18,5 +18,6 @@ namespace TaskHeroes.Data
 		public string City { get; set; }
 		public string Province { get; set; }
 		public string Description { get; set; }
+		public DateTime DateCreated { get; set; }
 	}
 }

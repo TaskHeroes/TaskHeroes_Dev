@@ -3,20 +3,8 @@
     ViewData["Title"] = "UserProfile";
 
     var profile_image = "~/Resources/Images/UserProfile/profile_picture_3.jpg";
-    var name = "John Doe";
-    var email = "example@uregina.ca";
-    var description = "This is a sample user description, which can be used as a bio on his/her user detail page";
     var user_review = "4";
     var member_since = "02/02/2020";
-
-    var username = "username123";
-    var firstname = "John";
-    var lastname = "Doe";
-    var city = "Regina";
-    var province = "SK";
-
-    var task_history_1 = "Task ID 00001";
-    var task_history_2 = "Task ID 00002";
 }
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -28,11 +16,11 @@
     <div class="leftcolumn">
         <div class="card">
             <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
-            <h1>@name</h1>
+            <h1>@(Model.FirstName + " " + Model.LastName)</h1>
             <form id="user_card_form">
                 <div class="form-group mx-auto row margin-bottom">
                     <textarea id="description" rows="4" readonly>
-                        @description
+                        @Model.Description
                     </textarea>
                 </div>
                 <div class="form-group row mx-auto margin-bottom">
@@ -46,11 +34,11 @@
                 <div class="form-group row mx-auto">
                     <label for="member_since" class="col-form-label">Member Since</label>
                     <div class="col-sm-7">
-                        <input type="datetime" class="form-control-plaintext" id="member_since" value=@member_since>
+                        <input type="datetime" class="form-control-plaintext" id="member_since" value=@Model.DateCreated.Date>
                     </div>
                 </div>
 
-                <p><button id="contact_btn">Contact @name</button></p>
+                <p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
                 <p><button id="edit_profile_btn">Edit Profile</button></p>
                 <p><button type="submit" id="save_edit_btn">Save</button></p>
             </form>
@@ -64,38 +52,38 @@
                 <div class="form-group row margin-bottom">
                     <label for="username" class="col-sm-2 col-form-label">Username</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="username" value=@username>
+                        <input type="text" class="form-control-plaintext" id="username" value=@Model.Username>
                     </div>
                 </div>
                 <div class="form-group row margin-bottom">
                     <label for="email" class="col-sm-2 col-form-label">Email</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control-plaintext" id="email" value=@email>
+                        <input type="email" class="form-control-plaintext" id="email" value=@Model.Email>
                     </div>
                 </div>
 
                 <div class="form-group row margin-bottom">
                     <label for="fname" class="col-sm-2 col-form-label">First Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="fname" value=@firstname>
+                        <input type="text" class="form-control-plaintext" id="fname" value=@Model.FirstName>
                     </div>
                 </div>
                 <div class="form-group row margin-bottom">
                     <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="lname" value=@lastname>
+                        <input type="text" class="form-control-plaintext" id="lname" value=@Model.LastName>
                     </div>
                 </div>
                 <div class="form-group row margin-bottom">
                     <label for="city" class="col-sm-2 col-form-label">City</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="city" value=@city>
+                        <input type="text" class="form-control-plaintext" id="city" value=@Model.City>
                     </div>
                 </div>
                 <div class="form-group row margin-bottom">
                     <label for="province" class="col-sm-2 col-form-label">Province</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="province" value=@province>
+                        <input type="text" class="form-control-plaintext" id="province" value=@Model.Province>
                     </div>
                 </div>
                 <div class="form-group row">
@@ -111,16 +99,16 @@
         <div class="job_history user_info">
             <h1>Task History</h1>
             <ul class="list-group">
-                <a href="">
-                    <li class="list-group-item">
-                        <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                        @task_history_1
-                    </li>
-                </a>
-                <li class="list-group-item">
-                    <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                    @task_history_2
-                </li>
+                @foreach (var item in Model.TaskHistory)
+                {
+                    <a href="">
+                        <li class="list-group-item">
+                            <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                            Task ID @item.Id
+                        </li>
+                    </a>
+                }
+
             </ul>
         </div>
     </div>
@@ -129,14 +117,15 @@
         <div class="posting_history user_info">
             <h1>Posting History</h1>
             <ul class="list-group">
-                <li class="list-group-item">
-                    <img src="~/Resources/Images/UserProfile/post_history.png" alt="task history icon" />
-                    @task_history_1
-                </li>
-                <li class="list-group-item">
-                    <img src="~/Resources/Images/UserProfile/post_history.png" alt="task history icon" />
-                    @task_history_2
-                </li>
+                @foreach (var item in Model.ListOfPostingsBeingOffered)
+                {
+                    <a href="">
+                        <li class="list-group-item">
+                            <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                            Task ID @item.Id
+                        </li>
+                    </a>
+                }
             </ul>
         </div>
     </div>

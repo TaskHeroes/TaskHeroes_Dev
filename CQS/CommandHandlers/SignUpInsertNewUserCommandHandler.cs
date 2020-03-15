@@ -20,6 +20,7 @@ namespace TaskHeroes.CQS.CommandHandlers
 		public void Handle(SignUpInsertNewUserCommand command)
 		{
 			command.NewUser.Id = _dbContext.Users.Any() ? _dbContext.Users.Max(x => x.Id) + 1 : 1;
+			command.NewUser.DateCreated = DateTime.Now;
 			_dbContext.Users.Add(command.NewUser);
 			_dbContext.SaveChanges();
 		}

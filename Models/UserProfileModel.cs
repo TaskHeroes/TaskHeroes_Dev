@@ -20,5 +20,6 @@ namespace TaskHeroes.Models
         public List<Posting> TaskHistory { get; set; }
         // ListOfPostingsBeingOffered is the list of postings the user is currently offering
         public List<Posting> ListOfPostingsBeingOffered { get; set; }
+        public DateTime DateCreated { get; set; }
     }
 }
