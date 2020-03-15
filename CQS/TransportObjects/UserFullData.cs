@@ -10,10 +10,10 @@ namespace TaskHeroes.CQS.TransportObjects
 	{
 		public User User { get; }
 		public decimal Rating { get; }
-		public List<Posting> TaskHistory { get; }
-		public List<Posting> ListOfPostingsBeingOffered { get; set; }
+		public List<Data.Task> TaskHistory { get; }
+		public List<Data.Task> ListOfPostingsBeingOffered { get; set; }
 
-		public UserFullData(User user, decimal rating, List<Posting> taskHistory, List<Posting> listOfPostingsBeingOffered)
+		public UserFullData(User user, decimal rating, List<Data.Task> taskHistory, List<Data.Task> listOfPostingsBeingOffered)
 		{
 			User = user;
 			Rating = rating;

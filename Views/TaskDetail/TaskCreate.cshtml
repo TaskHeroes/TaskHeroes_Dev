@@ -1,4 +1,4 @@
-﻿
+﻿@model TaskDetailModel
 @{
     ViewData["Title"] = "TaskCreate";
 }
@@ -11,19 +11,19 @@
             <img src="~/Resources/Images/TaskDetail/task_create.png" />
             <h1>Create A Task for Our Heroes</h1>
         </div>
-        <form id="task_create_form">
+        <form id="task_create_form" asp-controller="TaskDetail" asp-action="Create" method="post">
             <div class="form-group">
                 <label for="title">Task Title</label>
-                <input type="text" class="form-control" id="title" aria-describedby="title">
+                <input asp-for="Title" type="text" class="form-control" id="title" aria-describedby="title">
                 <small id="titleHelp" class="form-text text-muted">Pick a title that will catch user attention</small>
             </div>
             <div class="form-group">
                 <label for="description">Description</label>
-                <textarea class="form-control" id="description" rows="3"></textarea>
+                <textarea asp-for="Description" class="form-control" id="description" rows="3"></textarea>
             </div>
             <div class="form-group">
                 <label for="job_type">Job Type</label>
-                <select class="form-control" id="job_type">
+                <select asp-for="JobType" class="form-control" id="job_type">
                     <option>Select a job type</option>
                     <option>One time task</option>
                     <option>Temporary task - more than one day</option>
@@ -34,11 +34,11 @@
             <div class="form-row">
                 <div class="form-group col-md-6">
                     <label for="money_offer">Money Offer</label>
-                    <input type="text" class="form-control" id="money_offer" placeholder="total money for the task">
+                    <input asp-for="MoneyOffer" type="text" class="form-control" id="money_offer" placeholder="total money for the task">
                 </div>
                 <div class="form-group col-md-4">
                     <label for="period">Work Period</label>
-                    <input type="text" class="form-control" id="period" placeholder="the time need to finish the task">
+                    <input asp-for="WorkPeriod" type="text" class="form-control" id="period" placeholder="the time need to finish the task">
                 </div>
             </div>
             <button type="submit" class="btn btn-primary">Create Task</button>

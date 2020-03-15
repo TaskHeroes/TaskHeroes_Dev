@@ -8,7 +8,7 @@ using TaskHeroes.Data;
 
 namespace TaskHeroes.CQS.QueryHandlers
 {
-	public class GetListsOfPostingsAndUsersQueryHandler : IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>>
+	public class GetListsOfPostingsAndUsersQueryHandler : IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Data.Task>, List<User>>>
 	{
 		private readonly TaskHeroesDbContext _dbContext;
 
@@ -17,12 +17,12 @@ namespace TaskHeroes.CQS.QueryHandlers
 			_dbContext = dbContext;
 		}
 
-		public Tuple<List<Posting>, List<User>> Handle(GetListsOfPostingsAndUsersQuery query)
+		public Tuple<List<Data.Task>, List<User>> Handle(GetListsOfPostingsAndUsersQuery query)
 		{
-			var listOfPostings = _dbContext.Postings.ToList();
+			var listOfPostings = _dbContext.Tasks.ToList();
 			var listOfUsers = _dbContext.Users.ToList();
 
-			return new Tuple<List<Posting>, List<User>>(listOfPostings, listOfUsers);
+			return new Tuple<List<Data.Task>, List<User>>(listOfPostings, listOfUsers);
 		}
 	}
 }

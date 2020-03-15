@@ -13,9 +13,9 @@ namespace TaskHeroes.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> _getListsOfPostingsAndUsersQueryHandler;
+        private readonly IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Task>, List<User>>> _getListsOfPostingsAndUsersQueryHandler;
 
-        public HomeController(ILogger<HomeController> logger, IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Posting>, List<User>>> getListsOfPostingsAndUsersQueryHandler)
+        public HomeController(ILogger<HomeController> logger, IQueryHandler<GetListsOfPostingsAndUsersQuery, Tuple<List<Task>, List<User>>> getListsOfPostingsAndUsersQueryHandler)
         {
             _logger = logger;
             _getListsOfPostingsAndUsersQueryHandler = getListsOfPostingsAndUsersQueryHandler;

@@ -8,7 +8,7 @@ namespace TaskHeroes.Models
 {
 	public class HomeModel
 	{
-		public List<Posting> ListOfPostings { get; set; }
+		public List<Data.Task> ListOfPostings { get; set; }
 		public List<User> ListOfUsers { get; set; }
 	}
 }

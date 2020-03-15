@@ -1,11 +1,6 @@
-﻿
+﻿@model TaskDetailModel
 @{
     ViewData["Title"] = "TaskCard";
-
-    var task_name = "House Keeping";
-    var work_type = "Onetimetask";
-    var offer = "$25";
-    var period = "2 days";
 }
 
 <link rel="stylesheet" href="~/css/TaskDetail/TaskDetail.css" />
@@ -13,27 +8,27 @@
 <div class="task_card mx-auto">
     <div class="box">
         <img src="~/Resources/Images/TaskDetail/task_icon.png" alt="avatar" style="width:100%">
-        <h2>@task_name</h2>
+        <h2>@Model.Title</h2>
         <form id="task_info_form">
             <div class="form-group row margin-bottom">
                 <label for="work_type" class="col-sm-5 col-form-label">Work Type</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control-plaintext" id="work_type" value=@work_type readonly>
+                    <input type="text" class="form-control-plaintext" id="work_type" value=@Model.JobType readonly>
                 </div>
             </div>
             <div class="form-group row margin-bottom">
                 <label for="Offer" class="col-sm-5 col-form-label">Offer</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control-plaintext" id="offer" value=@offer readonly>
+                    <input type="text" class="form-control-plaintext" id="offer" value=@Model.MoneyOffer readonly>
                 </div>
             </div>
             <div class="form-group row margin-bottom">
                 <label for="work_period" class="col-sm-5 col-form-label">Work Period</label>
                 <div class="col-sm-7">
-                    <input type="text" class="form-control-plaintext" id="work_period" value=@period readonly>
+                    <input type="text" class="form-control-plaintext" id="work_period" value=@Model.WorkPeriod readonly>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary" id="detail_btn">Detail</button>
+            <button type="submit" class="btn btn-primary" id="detail_btn" asp-controller="TaskDetail" asp-action="Details" asp-route-id=@Model.Id>Detail</button>
         </form>
     </div>
 </div>

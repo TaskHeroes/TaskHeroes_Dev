@@ -105,7 +105,7 @@
             <ul class="list-group">
                 @foreach (var item in Model.TaskHistory)
                 {
-                    <a href="">
+                    <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
                         <li class="list-group-item">
                             <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
                             Task ID @item.Id
@@ -123,7 +123,7 @@
             <ul class="list-group">
                 @foreach (var item in Model.ListOfPostingsBeingOffered)
                 {
-                    <a href="">
+                    <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
                         <li class="list-group-item">
                             <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
                             Task ID @item.Id

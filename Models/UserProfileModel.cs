@@ -17,9 +17,9 @@ namespace TaskHeroes.Models
         public string Description { get; set; }
         public decimal Rating { get; set; }
         // TaskHistory is the list of postings that the user completed before
-        public List<Posting> TaskHistory { get; set; }
+        public List<Task> TaskHistory { get; set; }
         // ListOfPostingsBeingOffered is the list of postings the user is currently offering
-        public List<Posting> ListOfPostingsBeingOffered { get; set; }
+        public List<Task> ListOfPostingsBeingOffered { get; set; }
         public DateTime DateCreated { get; set; }
         public bool AllowEditProfile { get; set; }
     }

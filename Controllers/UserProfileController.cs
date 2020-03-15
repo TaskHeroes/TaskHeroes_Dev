@@ -64,7 +64,7 @@ namespace TaskHeroes.Controllers
             return View(userModel);
         }
 
-        // Endpoint: /UserProfile/UserDetails?id=1
+        // Endpoint: /UserProfile/UserDetails?id=1 OR /UserProfile/UserDetails/1
         // TO USE: asp-controller="UserProfile" asp-action="UserDetails" asp-route-id="@item.Id"
         public ActionResult UserDetails(int id)
         {

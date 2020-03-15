@@ -1,100 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskHeroes.CQS.Commands;
+using TaskHeroes.CQS.Queries;
+using TaskHeroes.CQSInterfaces;
+using TaskHeroes.Data;
+using TaskHeroes.Models;
 
 namespace TaskHeroes.Controllers
 {
     public class TaskDetailController : Controller
     {
+        private readonly ICommandHandler<InsertNewTaskCommand> _insertNewTaskCommandHandler;
+        private readonly IQueryHandler<GetTaskByIdQuery, Task> _getTaskByIdQueryHandler;
+        public TaskDetailController(
+            ICommandHandler<InsertNewTaskCommand> insertNewTaskCommandHandler,
+            IQueryHandler<GetTaskByIdQuery, Task> getTaskByIdQueryHandler)
+        {
+            _insertNewTaskCommandHandler = insertNewTaskCommandHandler;
+            _getTaskByIdQueryHandler = getTaskByIdQueryHandler;
+        }
+
         // GET: TaskDetail
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult TaskCard()
+        
+        public ActionResult TaskCard(int id)
         {
-            return View();
+            var task = _getTaskByIdQueryHandler.Handle(new GetTaskByIdQuery(id));
+            var taskModel = new TaskDetailModel();
+            taskModel.Id = task.Id;
+            taskModel.Title = task.Title;
+            taskModel.Description = task.Description;
+            taskModel.JobType = task.JobType;
+            taskModel.MoneyOffer = task.MoneyOffer;
+            taskModel.WorkPeriod = task.WorkPeriod;
+            taskModel.OffererId = task.OffererId;
+
+            return View(taskModel);
         }
+        
+        // GET: TaskDetail/Details/5
+        public ActionResult Details(int id)
+        {
+            var task = _getTaskByIdQueryHandler.Handle(new GetTaskByIdQuery(id));
+            var taskModel = new TaskDetailModel();
+            taskModel.Id = task.Id;
+            taskModel.Title = task.Title;
+            taskModel.Description = task.Description;
+            taskModel.JobType = task.JobType;
+            taskModel.MoneyOffer = task.MoneyOffer;
+            taskModel.WorkPeriod = task.WorkPeriod;
+            taskModel.OffererId = task.OffererId;
+
+            return View(taskModel);
+        }
+
         public ActionResult TaskCreate()
         {
             return View();
         }
-        // GET: TaskDetail/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
 
-        // GET: TaskDetail/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: TaskDetail/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public ActionResult Create(TaskDetailModel model)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            _insertNewTaskCommandHandler.Handle(new InsertNewTaskCommand(model.Title, model.Description, model.JobType, model.MoneyOffer, model.WorkPeriod, HttpContext.Session.GetInt32("userid").Value));
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TaskDetail/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: TaskDetail/Edit/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: TaskDetail/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: TaskDetail/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+            return RedirectToAction("Index", "UserProfile");
         }
     }
 }
