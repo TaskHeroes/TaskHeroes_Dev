@@ -1,14 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TaskHeroes.CQS.Commands;
 using TaskHeroes.CQS.Queries;
 using TaskHeroes.CQS.TransportObjects;
 using TaskHeroes.CQSInterfaces;
-using TaskHeroes.Data;
 using TaskHeroes.Models;
 
 namespace TaskHeroes.Controllers
@@ -40,7 +35,7 @@ namespace TaskHeroes.Controllers
         }
 
         // Endpoint: /UserProfile/UserCard?id=1
-        // TO USE: asp-controller="UserProfile" asp-action="UserCard" asp-route-id="@item.Id"
+        // TO USE: asp-controller="UserProfile" asp-action="UserCard" asp-route-id=@item.Id
         public ActionResult UserCard(int id)
         {
             // Pull up the information of the logged in user
@@ -57,7 +52,7 @@ namespace TaskHeroes.Controllers
             userModel.Province = userFullData.User.Province;
             userModel.Description = userFullData.User.Description;
             userModel.Rating = userFullData.User.Rating;
-            userModel.TaskHistory = userFullData.TaskHistory;
+            userModel.ListOfInterestingTasks = userFullData.ListOfInterestingTasks;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
             userModel.AllowEditProfile = false;
@@ -67,7 +62,7 @@ namespace TaskHeroes.Controllers
         }
 
         // Endpoint: /UserProfile/UserDetails?id=1 OR /UserProfile/UserDetails/1
-        // TO USE: asp-controller="UserProfile" asp-action="UserDetails" asp-route-id="@item.Id"
+        // TO USE: asp-controller="UserProfile" asp-action="UserDetails" asp-route-id=@item.Id
         public ActionResult UserDetails(int id)
         {
             // Pull up the information of the logged in user
@@ -84,7 +79,7 @@ namespace TaskHeroes.Controllers
             userModel.Province = userFullData.User.Province;
             userModel.Description = userFullData.User.Description;
             userModel.Rating = userFullData.User.Rating;
-            userModel.TaskHistory = userFullData.TaskHistory;
+            userModel.ListOfInterestingTasks = userFullData.ListOfInterestingTasks;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
             userModel.AllowEditProfile = HttpContext.Session.GetInt32("userid").HasValue && id == HttpContext.Session.GetInt32("userid").Value;

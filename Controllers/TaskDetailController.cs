@@ -15,12 +15,15 @@ namespace TaskHeroes.Controllers
     {
         private readonly ICommandHandler<InsertNewTaskCommand> _insertNewTaskCommandHandler;
         private readonly IQueryHandler<GetTaskByIdQuery, Task> _getTaskByIdQueryHandler;
+        private readonly ICommandHandler<InsertInterestingTaskCommand> _insertInterestingTaskCommandHandler;
         public TaskDetailController(
             ICommandHandler<InsertNewTaskCommand> insertNewTaskCommandHandler,
-            IQueryHandler<GetTaskByIdQuery, Task> getTaskByIdQueryHandler)
+            IQueryHandler<GetTaskByIdQuery, Task> getTaskByIdQueryHandler,
+            ICommandHandler<InsertInterestingTaskCommand> insertInterestingTaskCommandHandler)
         {
             _insertNewTaskCommandHandler = insertNewTaskCommandHandler;
             _getTaskByIdQueryHandler = getTaskByIdQueryHandler;
+            _insertInterestingTaskCommandHandler = insertInterestingTaskCommandHandler;
         }
 
         // GET: TaskDetail
@@ -71,6 +74,16 @@ namespace TaskHeroes.Controllers
             _insertNewTaskCommandHandler.Handle(new InsertNewTaskCommand(model.Title, model.Description, model.JobType, model.MoneyOffer, model.WorkPeriod, HttpContext.Session.GetInt32("userid").Value));
 
             return RedirectToAction("Index", "UserProfile");
+        }
+
+        public ActionResult InterestButtonClick(int id)
+        {
+            var loggedInUserId = HttpContext.Session.GetInt32("userid");
+
+            if (loggedInUserId != null)
+                _insertInterestingTaskCommandHandler.Handle(new InsertInterestingTaskCommand(loggedInUserId.Value, id));
+
+            return RedirectToAction("Index", "Home");
         }
     }
 }

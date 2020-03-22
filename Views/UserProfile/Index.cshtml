@@ -106,14 +106,14 @@
 
 <div class="rightcolumn">
     <div class="job_history user_info">
-        <h1>Task History</h1>
+        <h1>Interesting Tasks</h1>
         <ul class="list-group">
-            @foreach (var item in Model.TaskHistory)
+            @foreach (var item in Model.ListOfInterestingTasks)
             {
                 <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
                     <li class="list-group-item">
                         <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                        Task ID @item.Id
+                        @item.Title
                     </li>
                 </a>
             }
@@ -131,7 +131,7 @@
                 <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
                     <li class="list-group-item">
                         <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                        Task ID @item.Id
+                        @item.Title
                     </li>
                 </a>
             }

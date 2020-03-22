@@ -18,10 +18,11 @@ namespace TaskHeroes.CQS.QueryHandlers
 		public UserFullData Handle(GetUserDataByUserIdQuery query)
 		{
 			var user = _dbContext.Users.FirstOrDefault(x => x.Id == query.UserId);
-			var taskHistory = _dbContext.Tasks.Where(x => x.OffererId == query.UserId).ToList(); // TODO: Use SeekerID when getting task history
+			var interestingData = _dbContext.InterestingTasks.Where(x => x.UserId == query.UserId).ToList();
+			var listOfInterestingTasks = _dbContext.Tasks.AsEnumerable().Where(x => interestingData.Any(y => y.TaskId == x.Id)).ToList();
 			var listOfPostingsBeingOffered = _dbContext.Tasks.Where(x => x.OffererId == query.UserId).ToList();
 
-			return new UserFullData(user, taskHistory, listOfPostingsBeingOffered);
+			return new UserFullData(user, listOfInterestingTasks, listOfPostingsBeingOffered);
 		}
 	}
 }

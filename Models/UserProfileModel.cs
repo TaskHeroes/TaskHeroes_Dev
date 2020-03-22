@@ -16,8 +16,8 @@ namespace TaskHeroes.Models
         public string Province { get; set; }
         public string Description { get; set; }
         public decimal Rating { get; set; }
-        // TaskHistory is the list of postings that the user completed before
-        public List<Task> TaskHistory { get; set; }
+        // ListOfInterestingTasks is the list of postings that the user is interested in
+        public List<Task> ListOfInterestingTasks { get; set; }
         // ListOfPostingsBeingOffered is the list of postings the user is currently offering
         public List<Task> ListOfPostingsBeingOffered { get; set; }
         public DateTime DateCreated { get; set; }

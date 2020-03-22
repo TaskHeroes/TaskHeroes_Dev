@@ -37,7 +37,9 @@
 					<input type="text" class="form-control-plaintext" id="work_period" value=@Model.WorkPeriod readonly>
 				</div>
 			</div>
-			<button type="submit" class="btn btn-primary" id="interested_btn">Interested</button>
+			<form>
+				<button type="submit" asp-controller="TaskDetail" asp-action="InterestButtonClick" asp-route-id=@Model.Id class="btn btn-primary" id="interested_btn">Interested</button>
+			</form>
 		</form>
 	</div>
 </div>

@@ -11,11 +11,13 @@ namespace TaskHeroes.Data
 
         public DbSet<User> Users { get; set; }
         public DbSet<Task> Tasks { get; set; }
+        public DbSet<InterestingTask> InterestingTasks { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<User>().ToTable("Users");
             modelBuilder.Entity<Task>().ToTable("Tasks");
+            modelBuilder.Entity<InterestingTask>().ToTable("InterestingTasks");
         }
     }
 }
