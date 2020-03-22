@@ -1,0 +1,35 @@
+﻿.container .box {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: auto;
+    text-align: center;
+    padding: 10px;
+}
+
+.container {
+    float: left;
+    width: 33.33%;
+}
+
+.container .stars-outer {
+    display: inline-block;
+    position: relative;
+    font-family: FontAwesome;
+}
+
+    .stars-outer::before {
+        content: "\f006 \f006 \f006 \f006 \f006";
+    }
+
+.container .stars-inner {
+    position: absolute;
+    top: 0;
+    left: 0;
+    white-space: nowrap;
+    overflow: hidden;
+    width: 0;
+}
+
+    .stars-inner::before {
+        content: "\f005 \f005 \f005 \f005 \f005";
+        color: #f8ce0b;
+    }

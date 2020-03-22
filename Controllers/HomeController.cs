@@ -28,7 +28,7 @@ namespace TaskHeroes.Controllers
             modelForView.ListOfPostings = queryResult.Item1;
             modelForView.ListOfUsers = queryResult.Item2;
 
-            return View(modelForView);
+            return View("Index", modelForView);
         }
 
         public IActionResult Login()
@@ -39,6 +39,11 @@ namespace TaskHeroes.Controllers
         public IActionResult Signup()
         {
             return RedirectToAction("SignUp", "Login");
+        }
+
+        public IActionResult Privacy()
+        {
+            return View();
         }
 
         public void Search()

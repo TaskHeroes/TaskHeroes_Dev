@@ -28,7 +28,8 @@ namespace TaskHeroes.Controllers
         // GET: UserProfile
         public ActionResult Index()
         {
-            return UserDetails(HttpContext.Session.GetInt32("userid").Value);
+            //return UserDetails(HttpContext.Session.GetInt32("userid").Value);
+            return Index();
         }
 
         public ActionResult EditUserProfile(UserProfileModel model)

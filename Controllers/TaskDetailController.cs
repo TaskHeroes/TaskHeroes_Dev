@@ -41,7 +41,7 @@ namespace TaskHeroes.Controllers
             taskModel.WorkPeriod = task.WorkPeriod;
             taskModel.OffererId = task.OffererId;
 
-            return View(taskModel);
+            return View("TaskCard",taskModel);
         }
         
         // GET: TaskDetail/Details/5
