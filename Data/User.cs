@@ -20,5 +20,6 @@ namespace TaskHeroes.Data
 		public string Description { get; set; }
 		public DateTime DateCreated { get; set; }
 		public decimal Rating { get; set; }
+		public string Image { get; set; }
 	}
 }

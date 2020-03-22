@@ -22,5 +22,6 @@ namespace TaskHeroes.Models
         public List<Task> ListOfPostingsBeingOffered { get; set; }
         public DateTime DateCreated { get; set; }
         public bool AllowEditProfile { get; set; }
+        public string Image { get; set; }
     }
 }

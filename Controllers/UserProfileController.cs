@@ -61,6 +61,7 @@ namespace TaskHeroes.Controllers
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
             userModel.AllowEditProfile = false;
+            userModel.Image = userFullData.User.Image;
 
             return View(userModel);
         }
@@ -87,6 +88,7 @@ namespace TaskHeroes.Controllers
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
             userModel.AllowEditProfile = HttpContext.Session.GetInt32("userid").HasValue && id == HttpContext.Session.GetInt32("userid").Value;
+            userModel.Image = userFullData.User.Image;
 
             return View(userModel);
         }
