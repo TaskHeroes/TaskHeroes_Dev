@@ -13,11 +13,6 @@
 
 <h1 class="display-4" align="center">Current Tasks and Users</h1>
 
-<!-------------------------------- HIDDEN FIELDS TO STORE USER REVIEW - USED TO DISPLAY STAR REVIEW ----------------------------------->
-@foreach (var user in Model.ListOfUsers)
-{
-    <input type="hidden" id="user_rating@(user.Id)" name="user_review" value=@user.Rating />
-}
 <div class="home_container">
     <!-------------------------------- LIST OF TASKS ------------------------------------------->
     @foreach (var task in Model.ListOfPostings)
@@ -53,6 +48,9 @@
     <!------------------------------LIST OF USERS -------------------------------------------->
     @foreach (var user in Model.ListOfUsers)
     {
+        <!--Hidden fields to store user rating - used to display star rating on user card-->
+        <input type="hidden" id="user_rating@(user.Id)" name="user_review" value=@user.Rating />
+
         <div class="container">
             <div class="box">
                 <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
@@ -67,7 +65,7 @@
                         <label for="user_rating" class="col-form-label">User Rating</label>
                         <div class="col-sm-7">
                             <div class="stars-outer">
-                                <div class="stars-inner" id=""></div>
+                                <div class="stars-inner" id="star@(user.Id)"></div>
                             </div>
                         </div>
                     </div>
