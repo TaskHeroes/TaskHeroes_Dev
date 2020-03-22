@@ -29,9 +29,9 @@ namespace TaskHeroes.Controllers
 
         public ActionResult EditUserProfile(UserProfileModel model)
         {
-            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(model.UserId, model.Username, model.Password, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
+            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(HttpContext.Session.GetInt32("userid").Value, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
 
-            return Index();
+            return RedirectToAction("Index");
         }
 
         // Endpoint: /UserProfile/UserCard?id=1

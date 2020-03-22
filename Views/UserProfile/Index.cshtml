@@ -149,34 +149,34 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form asp-controller="UserProfile" asp-action="EditUserProfile" method="post">
                     <div class="form-group">
                         <label for="editEmail">Email address</label>
-                        <input type="email" class="form-control" id="editEmail" placeholder="Enter email">
+                        <input asp-for="Email" type="email" class="form-control" id="editEmail" placeholder="Enter email">
                     </div>
                     <div class="form-group">
                         <label for="editDescription">Description</label>
-                        <textarea class="form-control" id="editDescription" rows="3" placeholder="Let people see how awesome you are..."></textarea>
+                        <textarea asp-for="Description" class="form-control" id="editDescription" rows="3" placeholder="Let people see how awesome you are..."></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="editFirstName">First Name</label>
-                        <input type="text" class="form-control" id="editFirstName">
+                        <input asp-for="FirstName" type="text" class="form-control" id="editFirstName">
                     </div>
 
                     <div class="form-group">
                         <label for="editLastName">Last Name</label>
-                        <input type="text" class="form-control" id="editLastName">
+                        <input asp-for="LastName" type="text" class="form-control" id="editLastName">
                     </div>
 
                     <div class="form-group">
                         <label for="editCity">City</label>
-                        <input type="text" class="form-control" id="editCity">
+                        <input asp-for="City" type="text" class="form-control" id="editCity">
                     </div>
 
                     <div class="form-group">
                         <label for="editProvince">Province</label>
-                        <input type="text" class="form-control" id="editProvince">
+                        <input asp-for="Province" type="text" class="form-control" id="editProvince">
                     </div>
 
                     <button type="submit" class="btn btn-primary">Submit</button>

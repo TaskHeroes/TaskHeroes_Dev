@@ -23,8 +23,6 @@ namespace TaskHeroes.CQS.CommandHandlers
 
 			if (user != null)
 			{
-				user.Username = command.Username;
-				user.Password = command.Password;
 				user.Email = command.Email;
 				user.FirstName = command.FirstName;
 				user.LastName = command.LastName;
