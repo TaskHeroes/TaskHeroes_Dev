@@ -3,9 +3,6 @@
 
 @{
     ViewData["Title"] = "Task Heroes";
-    var profile_image = "~/Resources/Images/UserProfile/profile_picture_2.jpg";
-    var user_review = 4.5;
-
     var userId = Context.Session.GetString("userid");
     if (userId != null)
         Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
@@ -13,12 +10,12 @@
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="~/css/Home/Home.css" />
-<input type="hidden" id="user_review" name="user_review" value=@user_review />
 
-<h1 class="display-4">Current Tasks and Users</h1>
+<h1 class="display-4" align="center">Current Tasks and Users</h1>
 
+<input type="hidden" id="user_review" name="user_review" value="4" />
 <div class="home_container">
-    <!-- List the most recent 3 task cards -->
+    <!-------------------------------- LIST OF TASKS ------------------------------------------->
     @foreach (var task in Model.ListOfPostings)
     {
         <div class="container">
@@ -49,16 +46,16 @@
             </div>
         </div>
     }
-    <!-- List the most recent 3 users -->
+    <!------------------------------LIST OF USERS -------------------------------------------->
     @foreach (var user in Model.ListOfUsers)
     {
         <div class="container">
             <div class="box">
-                <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
+                <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
                 <h1>@(user.FirstName + " " + user.LastName)</h1>
                 <form id="user_card_form">
                     <div class="form-group mx-auto row margin-bottom">
-                        <textarea id="description" oninput='this.style.height = "";this.style.height = this.scrollHeight + "px"' readonly>
+                        <textarea id="description" readonly>
                                 @user.Description
                         </textarea>
                     </div>

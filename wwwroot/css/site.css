@@ -70,6 +70,10 @@ body {
   line-height: 60px; /* Vertically center the text there */
 }
 
-#header_title {
+#header_title, h1 {
     font-family: 'Cinzel Decorative', cursive;
+}
+
+.container img{
+    width: 5%;
 }
