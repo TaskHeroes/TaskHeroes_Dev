@@ -18,7 +18,8 @@ namespace TaskHeroes.CQS.QueryHandlers
 		public UserFullData Handle(GetUserDataByUserIdQuery query)
 		{
 			var user = _dbContext.Users.FirstOrDefault(x => x.Id == query.UserId);
-			var rating = 0; // TODO: Get rating by user id
+			var ratingData = _dbContext.Ratings.FirstOrDefault(x => x.Id == query.UserId);
+			var rating = ratingData == null || ratingData.NumberOfRatings == 0 ? 0 : ratingData.RatingTotal / ratingData.NumberOfRatings;
 			var taskHistory = _dbContext.Tasks.Where(x => x.OffererId == query.UserId).ToList(); // TODO: Use SeekerID when getting task history
 			var listOfPostingsBeingOffered = _dbContext.Tasks.Where(x => x.OffererId == query.UserId).ToList();
 
