@@ -82,7 +82,7 @@ namespace TaskHeroes.Controllers
             userModel.City = userFullData.User.City;
             userModel.Province = userFullData.User.Province;
             userModel.Description = userFullData.User.Description;
-            userModel.Rating = userFullData.Rating;
+            userModel.Rating = userFullData.User.Rating;
             userModel.TaskHistory = userFullData.TaskHistory;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
