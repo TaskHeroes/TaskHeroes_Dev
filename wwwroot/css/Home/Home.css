@@ -1,26 +1,32 @@
-﻿.container .box {
-    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-    margin: auto;
-    text-align: center;
-    padding: 10px;
+﻿.home_container {
+    overflow: scroll;
+    width: 100%;
 }
 
-.container {
-    float: left;
-    width: 33.33%;
-}
-
-.container .stars-outer {
-    display: inline-block;
-    position: relative;
-    font-family: FontAwesome;
-}
-
-    .stars-outer::before {
-        content: "\f006 \f006 \f006 \f006 \f006";
+    .home_container .container .box {
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+        margin: auto;
+        text-align: center;
+        padding: 10px;
     }
 
-.container .stars-inner {
+    .home_container .container {
+        float: left;
+        width: 33.33%;
+        padding-bottom: 10px;
+    }
+
+        .home_container .container .stars-outer {
+            display: inline-block;
+            position: relative;
+            font-family: FontAwesome;
+        }
+
+.stars-outer::before {
+    content: "\f006 \f006 \f006 \f006 \f006";
+}
+
+.home_container .container .stars-inner {
     position: absolute;
     top: 0;
     left: 0;
@@ -29,7 +35,19 @@
     width: 0;
 }
 
-    .stars-inner::before {
-        content: "\f005 \f005 \f005 \f005 \f005";
-        color: #f8ce0b;
-    }
+.stars-inner::before {
+    content: "\f005 \f005 \f005 \f005 \f005";
+    color: #f8ce0b;
+}
+
+
+textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    resize: none;
+    padding: 10px;
+    white-space: normal;
+    text-align: justify;
+    text-align-last: center;
+}
