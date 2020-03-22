@@ -1,6 +1,11 @@
 ﻿@model TaskDetailModel
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "TaskCreate";
+
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/TaskDetail/TaskDetail.css" />

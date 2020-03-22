@@ -1,4 +1,4 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
 @{
     Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
     ViewData["Title"] = "Task Detail";
@@ -14,6 +14,10 @@
     var gallery_image1 = "~/Resources/Images/TaskDetail/task_detail_image_1.jpg";
     var gallery_image2 = "~/Resources/Images/TaskDetail/task_detail_image_2.jpg";
     var gallery_image3 = "~/Resources/Images/TaskDetail/task_detail_image_3.jpg";
+
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/TaskDetail/TaskDetail.css" />
@@ -79,7 +83,7 @@
                 <span class="sr-only">Next</span>
             </a>
         </div>
-    </div>    
+    </div>
 </div>
 
 <script type="text/javascript" src="~/js/TaskDetail/TaskDetail.js"></script>

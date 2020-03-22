@@ -1,9 +1,15 @@
 ﻿@model SignUpModel
+@using Microsoft.AspNetCore.Http
+
 @*
     Page for Sign Up - Put under Login View so they share the same controller and model
 *@
 @{
     ViewData["Title"] = "Sign Up";
+
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 <link rel="stylesheet" href="~/css/Login/Signup.css" />
 

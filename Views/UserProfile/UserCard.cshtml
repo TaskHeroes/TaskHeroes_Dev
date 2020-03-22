@@ -1,14 +1,13 @@
 ﻿@model UserProfileModel
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "UserCard";
 
     var profile_image = "~/Resources/Images/UserProfile/profile_picture_2.jpg";
-    var name = "Sample User";
-    var email = "example@uregina.ca";
-    var description = "Testing description. abaesfawefkjasdkfj asdjfasdjfpasodfajsdf";
-    var status = "Active";
-    var user_review = "4";
-    var member_since = "02/02/2020";
+    
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

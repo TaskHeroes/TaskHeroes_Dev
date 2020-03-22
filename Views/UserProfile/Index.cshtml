@@ -1,140 +1,144 @@
 ﻿@model UserProfileModel
+@using Microsoft.AspNetCore.Http
 @{
     Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
     ViewData["Title"] = "UserProfile";
 
     var profile_image = "~/Resources/Images/UserProfile/profile_picture_3.jpg";
     var user_review = "4";
-    var member_since = "02/02/2020";
+
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="~/css/UserProfile/UserProfile.css"/>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="~/css/UserProfile/UserProfile.css" />
 
-    <!-- Hidden fields for values that need to be passed into javascript -->
-    <input type="hidden" id="user_review" name="user_review" value=@user_review />
-    <h1>User Profile Page</h1>
-    <div class="leftcolumn">
-        <div class="card">
-            <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
-            <h1>@(Model.FirstName + " " + Model.LastName)</h1>
-            <form id="user_card_form">
-                <div class="form-group mx-auto row margin-bottom">
-                    <textarea id="description" rows="4" readonly>
+<!-- Hidden fields for values that need to be passed into javascript -->
+<input type="hidden" id="user_review" name="user_review" value=@user_review />
+<h1>User Profile Page</h1>
+<div class="leftcolumn">
+    <div class="card">
+        <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
+        <h1>@(Model.FirstName + " " + Model.LastName)</h1>
+        <form id="user_card_form">
+            <div class="form-group mx-auto row margin-bottom">
+                <textarea id="description" rows="4" readonly>
                         @Model.Description
                     </textarea>
-                </div>
-                <div class="form-group row mx-auto margin-bottom">
-                    <label for="user_rating" class="col-form-label">User Rating</label>
-                    <div class="col-sm-7">
-                        <div class="stars-outer">
-                            <div class="stars-inner"></div>
-                        </div>
+            </div>
+            <div class="form-group row mx-auto margin-bottom">
+                <label for="user_rating" class="col-form-label">User Rating</label>
+                <div class="col-sm-7">
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
                     </div>
                 </div>
-                <div class="form-group row mx-auto">
-                    <label for="member_since" class="col-form-label">Member Since</label>
-                    <div class="col-sm-7">
-                        <input type="datetime" class="form-control-plaintext" id="member_since" value=@Model.DateCreated.Date>
-                    </div>
+            </div>
+            <div class="form-group row mx-auto">
+                <label for="member_since" class="col-form-label">Member Since</label>
+                <div class="col-sm-7">
+                    <input type="datetime" class="form-control-plaintext" id="member_since" value=@Model.DateCreated.Date>
                 </div>
+            </div>
 
-                <p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
+            <p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
 
-                @if (Model.AllowEditProfile)
-                {
-                    <p><button id="edit_profile_btn">Edit Profile</button></p>
-                    <p><button type="submit" id="save_edit_btn">Save</button></p>
-                }
-            </form>
-        </div>
+            @if (Model.AllowEditProfile)
+            {
+                <p><button id="edit_profile_btn">Edit Profile</button></p>
+                <p><button type="submit" id="save_edit_btn">Save</button></p>
+            }
+        </form>
     </div>
-    
-    <div class="rightcolumn">
-        <div class="user_info">
-            <h1>User Info</h1>
-            <form id="user_info_form">
-                <div class="form-group row margin-bottom">
-                    <label for="username" class="col-sm-2 col-form-label">Username</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="username" value=@Model.Username>
-                    </div>
-                </div>
-                <div class="form-group row margin-bottom">
-                    <label for="email" class="col-sm-2 col-form-label">Email</label>
-                    <div class="col-sm-10">
-                        <input type="email" class="form-control-plaintext" id="email" value=@Model.Email>
-                    </div>
-                </div>
+</div>
 
-                <div class="form-group row margin-bottom">
-                    <label for="fname" class="col-sm-2 col-form-label">First Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="fname" value=@Model.FirstName>
-                    </div>
+<div class="rightcolumn">
+    <div class="user_info">
+        <h1>User Info</h1>
+        <form id="user_info_form">
+            <div class="form-group row margin-bottom">
+                <label for="username" class="col-sm-2 col-form-label">Username</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="username" value=@Model.Username>
                 </div>
-                <div class="form-group row margin-bottom">
-                    <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="lname" value=@Model.LastName>
-                    </div>
+            </div>
+            <div class="form-group row margin-bottom">
+                <label for="email" class="col-sm-2 col-form-label">Email</label>
+                <div class="col-sm-10">
+                    <input type="email" class="form-control-plaintext" id="email" value=@Model.Email>
                 </div>
-                <div class="form-group row margin-bottom">
-                    <label for="city" class="col-sm-2 col-form-label">City</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="city" value=@Model.City>
-                    </div>
-                </div>
-                <div class="form-group row margin-bottom">
-                    <label for="province" class="col-sm-2 col-form-label">Province</label>
-                    <div class="col-sm-10">
-                        <input type="text" class="form-control-plaintext" id="province" value=@Model.Province>
-                    </div>
-                </div>
-                <div class="form-group row">
-                    <div class="col-sm-10">
-                        <button id="save_btn" type="submit" class="btn btn-primary">Save</button>
-                    </div>
-                </div>
-            </form>
-        </div>
-    </div>
-    
-    <div class="rightcolumn">
-        <div class="job_history user_info">
-            <h1>Task History</h1>
-            <ul class="list-group">
-                @foreach (var item in Model.TaskHistory)
-                {
-                    <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
-                        <li class="list-group-item">
-                            <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                            Task ID @item.Id
-                        </li>
-                    </a>
-                }
+            </div>
 
-            </ul>
-        </div>
+            <div class="form-group row margin-bottom">
+                <label for="fname" class="col-sm-2 col-form-label">First Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="fname" value=@Model.FirstName>
+                </div>
+            </div>
+            <div class="form-group row margin-bottom">
+                <label for="lname" class="col-sm-2 col-form-label">Last Name</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="lname" value=@Model.LastName>
+                </div>
+            </div>
+            <div class="form-group row margin-bottom">
+                <label for="city" class="col-sm-2 col-form-label">City</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="city" value=@Model.City>
+                </div>
+            </div>
+            <div class="form-group row margin-bottom">
+                <label for="province" class="col-sm-2 col-form-label">Province</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control-plaintext" id="province" value=@Model.Province>
+                </div>
+            </div>
+            <div class="form-group row">
+                <div class="col-sm-10">
+                    <button id="save_btn" type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </form>
     </div>
+</div>
 
-    <div class="rightcolumn">
-        <div class="posting_history user_info">
-            <h1>Posting History</h1>
-            <ul class="list-group">
-                @foreach (var item in Model.ListOfPostingsBeingOffered)
-                {
-                    <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
-                        <li class="list-group-item">
-                            <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
-                            Task ID @item.Id
-                        </li>
-                    </a>
-                }
-            </ul>
-        </div>
+<div class="rightcolumn">
+    <div class="job_history user_info">
+        <h1>Task History</h1>
+        <ul class="list-group">
+            @foreach (var item in Model.TaskHistory)
+            {
+                <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
+                    <li class="list-group-item">
+                        <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                        Task ID @item.Id
+                    </li>
+                </a>
+            }
+
+        </ul>
     </div>
-    
+</div>
+
+<div class="rightcolumn">
+    <div class="posting_history user_info">
+        <h1>Posting History</h1>
+        <ul class="list-group">
+            @foreach (var item in Model.ListOfPostingsBeingOffered)
+            {
+                <a asp-controller="TaskDetail" asp-action="Details" asp-route-id=@item.Id>
+                    <li class="list-group-item">
+                        <img src="~/Resources/Images/UserProfile/task_history.png" alt="task history icon" />
+                        Task ID @item.Id
+                    </li>
+                </a>
+            }
+        </ul>
+    </div>
+</div>
+
 
 
 <script type="text/javascript" src="~/js/UserProfile/UserProfile.js"></script>

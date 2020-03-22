@@ -1,10 +1,14 @@
 ﻿@model HomeModel
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Task Heroes";
     var profile_image = "~/Resources/Images/UserProfile/profile_picture_2.jpg";
     var user_review = 4.5;
 
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">

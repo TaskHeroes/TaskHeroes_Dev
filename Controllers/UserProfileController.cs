@@ -17,6 +17,7 @@ namespace TaskHeroes.Controllers
     {
         private readonly IQueryHandler<GetUserDataByUserIdQuery, UserFullData> _getUserByUserIdQueryHandler;
         private readonly ICommandHandler<EditUserProfileCommand> _editUserProfileCommandHandler;
+
         public UserProfileController(
             IQueryHandler<GetUserDataByUserIdQuery, UserFullData> getUserByUserIdQueryHandler,
             ICommandHandler<EditUserProfileCommand> editUserProfileCommandHandler)
@@ -28,8 +29,7 @@ namespace TaskHeroes.Controllers
         // GET: UserProfile
         public ActionResult Index()
         {
-            //return UserDetails(HttpContext.Session.GetInt32("userid").Value);
-            return Index();
+            return UserDetails(HttpContext.Session.GetInt32("userid").Value);
         }
 
         public ActionResult EditUserProfile(UserProfileModel model)

@@ -1,6 +1,12 @@
 ﻿@model LoginModel
+@using Microsoft.AspNetCore.Http
+
 @{
     ViewData["Title"] = "Login";
+
+    var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 <link rel="stylesheet" href="~/css/Login/Login.css" />
 
@@ -58,7 +64,7 @@
           class="close" title="Close Modal">&times;</span>
 
     <!-- Modal Content -->
-    <form class="modal-content animate"  asp-controller="Login" asp-action="LoginForTaskOfferer" method="post">
+    <form class="modal-content animate" asp-controller="Login" asp-action="LoginForTaskOfferer" method="post">
         <div class="imgcontainer">
             <img src="~/Resources/Images/Login/employer_login.png" alt="employer_login" class="avatar" style="width:40%;">
         </div>

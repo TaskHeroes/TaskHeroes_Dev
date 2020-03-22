@@ -1,10 +1,15 @@
 ﻿@model TaskDetailModel
+@using Microsoft.AspNetCore.Http
 @{
 	ViewData["Title"] = "Details";
 
 	var gallery_image1 = "~/Resources/Images/TaskDetail/task_detail_image_1.jpg";
 	var gallery_image2 = "~/Resources/Images/TaskDetail/task_detail_image_2.jpg";
 	var gallery_image3 = "~/Resources/Images/TaskDetail/task_detail_image_3.jpg";
+
+	var userId = Context.Session.GetString("userid");
+    if (userId != null)
+        Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
 
 <link rel="stylesheet" href="~/css/TaskDetail/TaskDetail.css" />
