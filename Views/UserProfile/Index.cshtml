@@ -47,8 +47,7 @@
 
             @if (Model.AllowEditProfile)
             {
-                <p><button id="edit_profile_btn">Edit Profile</button></p>
-                <p><button type="submit" id="save_edit_btn">Save</button></p>
+                <p><button type="button" id="edit_profile_btn" data-toggle="modal" data-target="#editModal">Edit Profile</button></p>
             }
         </form>
     </div>
@@ -139,7 +138,56 @@
     </div>
 </div>
 
+<!------------------------------ FORM MODAL FOR EDITING USER PROFILE ---------------------------------->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalTitle">Edit Profile</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="editEmail">Email address</label>
+                        <input type="email" class="form-control" id="editEmail" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="editDescription">Description</label>
+                        <textarea class="form-control" id="editDescription" rows="3" placeholder="Let people see how awesome you are..."></textarea>
+                    </div>
 
+                    <div class="form-group">
+                        <label for="editFirstName">First Name</label>
+                        <input type="text" class="form-control" id="editFirstName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editLastName">Last Name</label>
+                        <input type="text" class="form-control" id="editLastName">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editCity">City</label>
+                        <input type="text" class="form-control" id="editCity">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="editProvince">Province</label>
+                        <input type="text" class="form-control" id="editProvince">
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script type="text/javascript" src="~/js/UserProfile/UserProfile.js"></script>
 <script type="text/javascript" src="~/js/UserProfile/UserProfile_EventHandler.js"></script>

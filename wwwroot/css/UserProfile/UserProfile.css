@@ -101,6 +101,9 @@ textarea {
     border-radius: 4px;
     resize: none;
     padding: 10px;
+    white-space: normal;
+    text-align: justify;
+    text-align-last: center;
 }
 
 input {
@@ -114,8 +117,11 @@ input {
     width: 50%;
 }
 
-textarea {
+modal textarea {
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+    resize: none;
+    padding: 10px;
     white-space: normal;
-    text-align: justify;
-    text-align-last: center;
 }

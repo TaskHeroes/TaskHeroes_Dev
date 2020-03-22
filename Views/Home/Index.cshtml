@@ -41,7 +41,7 @@
                             <input type="text" class="form-control-plaintext" id="work_period" value=@task.WorkPeriod readonly>
                         </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" id="detail_btn" asp-controller="TaskDetail" asp-action="Details" asp-route-id=@task.Id>Detail</button>
+                    <button type="submit" class="btn btn-primary" id="detail_btn" asp-controller="TaskDetail" asp-action="Details" asp-route-id=@task.Id>Task Detail</button>
                 </form>
             </div>
         </div>
@@ -73,6 +73,7 @@
                             <input type="datetime" class="form-control-plaintext" id="member_since" value=@user.DateCreated>
                         </div>
                     </div>
+                    <button type="submit" class="btn btn-primary" id="user_into_btn" asp-controller="UserDetail" asp-action="UserDetail" asp-route-id=@user.Id>Hero Profile</button>
                 </form>
             </div>
         </div>
