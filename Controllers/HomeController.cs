@@ -46,8 +46,21 @@ namespace TaskHeroes.Controllers
             return View();
         }
 
-        public void Search()
+        public IActionResult SignOut()
         {
+            HttpContext.Session.Clear();
+            return Index();
+        }
+
+        public IActionResult PostATask()
+        {
+            return RedirectToAction("TaskCreate", "TaskDetail");
+        }
+        
+
+        public IActionResult ViewUserProfile()
+        {
+            return RedirectToAction("Index", "UserProfile");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
