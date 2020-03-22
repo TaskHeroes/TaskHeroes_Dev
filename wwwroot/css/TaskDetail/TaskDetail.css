@@ -10,14 +10,14 @@
 /* Layout style */
 .leftcolumn {
     float: left;
-    width: 25%;
+    width: 30%;
     height: 100%;
 }
 
 .rightcolumn {
     float: right;
     width: 70%;
-    padding-left: 5%;
+    padding-left: 2%;
     margin-bottom: 20px;
 }
 
@@ -41,4 +41,15 @@
 
 .task_create{
     width: 80%;
+}
+
+label {
+    font-weight: bold;
+}
+
+/* Responsive layout - when the screen is less than 600px wide, make the three columns stack on top of each other instead of next to each other */
+@media screen and (max-width: 600px) {
+    .leftcolumn, .rightcolumn {
+        width: 100%;
+    }
 }

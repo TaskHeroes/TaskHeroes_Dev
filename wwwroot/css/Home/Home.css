@@ -64,3 +64,13 @@ textarea {
 .home_container h2 {
     font-size:large;
 }
+
+label {
+    font-weight: bold;
+}
+
+@media screen and (max-width: 600px) {
+    .home_container .container {
+        width: 100%;
+    }
+}
