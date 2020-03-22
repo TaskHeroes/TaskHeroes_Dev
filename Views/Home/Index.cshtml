@@ -13,7 +13,11 @@
 
 <h1 class="display-4" align="center">Current Tasks and Users</h1>
 
-<input type="hidden" id="user_review" name="user_review" value="4" />
+<!-------------------------------- HIDDEN FIELDS TO STORE USER REVIEW - USED TO DISPLAY STAR REVIEW ----------------------------------->
+@foreach (var user in Model.ListOfUsers)
+{
+    <input type="hidden" id="user_rating@(user.Id)" name="user_review" value=@user.Rating />
+}
 <div class="home_container">
     <!-------------------------------- LIST OF TASKS ------------------------------------------->
     @foreach (var task in Model.ListOfPostings)
@@ -63,7 +67,7 @@
                         <label for="user_rating" class="col-form-label">User Rating</label>
                         <div class="col-sm-7">
                             <div class="stars-outer">
-                                <div class="stars-inner"></div>
+                                <div class="stars-inner" id=""></div>
                             </div>
                         </div>
                     </div>
