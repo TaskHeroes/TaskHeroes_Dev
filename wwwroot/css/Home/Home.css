@@ -1,5 +1,5 @@
 ﻿.home_container {
-    overflow: scroll;
+    overflow: auto;
     width: 100%;
 }
 
@@ -50,4 +50,17 @@ textarea {
     white-space: normal;
     text-align: justify;
     text-align-last: center;
+}
+
+.margin-bottom {
+    margin-bottom: 1px;
+}
+
+.home_container h1 {
+    font-family: 'Cinzel Decorative', cursive;
+    font-size: large;
+}
+
+.home_container h2 {
+    font-size:large;
 }

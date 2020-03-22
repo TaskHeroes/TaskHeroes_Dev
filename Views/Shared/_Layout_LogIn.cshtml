@@ -12,21 +12,19 @@
     <header class="position-sticky">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
+                <img src="~/Resources/Images/logo.png" />
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index"><span id="header_title">TASK HEROES</span></a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-                    <form>
+                    <form class="" form-inline my-2 my-lg-0"">
                         <button type="submit" class="btn btn-outline-success my-2 my-sm-0" asp-area="" asp-controller="Home" asp-action="PostATask">Post a Task</button>
-                    </form>
-                    <form>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" asp-area="" asp-controller="Home" asp-action="SignOut">Sign Out</button>
-                    </form>
-                    <form>
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit" asp-area="" asp-controller="Home" asp-action="ViewUserProfile">View User Profile</button>
                     </form>
+     
                 </div>
             </div>
         </nav>
