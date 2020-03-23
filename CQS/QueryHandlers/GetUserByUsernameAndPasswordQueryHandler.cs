@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using TaskHeroes.CQS.Queries;
 using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
@@ -19,6 +16,7 @@ namespace TaskHeroes.CQS.QueryHandlers
 
 		public User Handle(GetUserByUsernameAndPasswordQuery query)
 		{
+			// Get and return the user by Username and Password
 			return _dbContext.Users.Where(x => x.Username == query.Username && x.Password == query.Password).FirstOrDefault();
 		}
 	}

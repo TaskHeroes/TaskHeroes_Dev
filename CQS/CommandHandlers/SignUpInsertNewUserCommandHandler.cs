@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using TaskHeroes.CQS.Commands;
 using TaskHeroes.CQSInterfaces;
 using TaskHeroes.Data;
@@ -19,10 +17,14 @@ namespace TaskHeroes.CQS.CommandHandlers
 
 		public void Handle(SignUpInsertNewUserCommand command)
 		{
+			// Set the new user's Id to either 1 or the max Id + 1 depending on whethere it's the first user in the table
 			command.NewUser.Id = _dbContext.Users.Any() ? _dbContext.Users.Max(x => x.Id) + 1 : 1;
-			command.NewUser.DateCreated = DateTime.Now;
-			_dbContext.Users.Add(command.NewUser);
 
+			// Set timestamp to current time
+			command.NewUser.DateCreated = DateTime.Now;
+
+			// Add the record to the Users table and commit changes
+			_dbContext.Users.Add(command.NewUser);
 			_dbContext.SaveChanges();
 		}
 	}

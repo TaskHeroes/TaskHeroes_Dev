@@ -4,6 +4,7 @@ using TaskHeroes.Data;
 
 namespace TaskHeroes.Models
 {
+    // User Profile model for user-related views and actions
     public class UserProfileModel
     {
         public int UserId { get; set; }

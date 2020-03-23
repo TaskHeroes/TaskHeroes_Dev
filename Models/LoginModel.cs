@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TaskHeroes.Models
 {
+    // Login Model for the login view and actions
     public class LoginModel
     {
         public string Username { get; set; }

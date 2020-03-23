@@ -21,26 +21,20 @@ namespace TaskHeroes.Controllers
             _editUserProfileCommandHandler = editUserProfileCommandHandler;
         }
 
-        // GET: UserProfile
+        // User Profile page
         public ActionResult Index()
         {
+            // Display user details by the logged in user's Id
             return UserDetails(HttpContext.Session.GetInt32("userid").Value);
         }
 
-        public ActionResult EditUserProfile(UserProfileModel model)
-        {
-            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(HttpContext.Session.GetInt32("userid").Value, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
-
-            return RedirectToAction("Index");
-        }
-
-        // Endpoint: /UserProfile/UserCard?id=1
-        // TO USE: asp-controller="UserProfile" asp-action="UserCard" asp-route-id=@item.Id
+        // User Card view
         public ActionResult UserCard(int id)
         {
-            // Pull up the information of the logged in user
+            // Pull up the information of the user by Id
             var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(id));
 
+            // Create and map data from the retrieved User to the UserProfileModel
             var userModel = new UserProfileModel();
             userModel.UserId = userFullData.User.Id;
             userModel.Email = userFullData.User.Email;
@@ -55,19 +49,22 @@ namespace TaskHeroes.Controllers
             userModel.ListOfInterestingTasks = userFullData.ListOfInterestingTasks;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
-            userModel.AllowEditProfile = false;
             userModel.Image = userFullData.User.Image;
 
+            // Does not allow edting profile in User Card view
+            userModel.AllowEditProfile = false;
+
+            // Return the User Card view with the corresponding model
             return View(userModel);
         }
 
-        // Endpoint: /UserProfile/UserDetails?id=1 OR /UserProfile/UserDetails/1
-        // TO USE: asp-controller="UserProfile" asp-action="UserDetails" asp-route-id=@item.Id
+        // User Details view
         public ActionResult UserDetails(int id)
         {
-            // Pull up the information of the logged in user
+            // Pull up the information of user by Id
             var userFullData = _getUserByUserIdQueryHandler.Handle(new GetUserDataByUserIdQuery(id));
 
+            // Create and map data from the retrieved User to the UserProfileModel
             var userModel = new UserProfileModel();
             userModel.UserId = userFullData.User.Id;
             userModel.Email = userFullData.User.Email;
@@ -82,10 +79,23 @@ namespace TaskHeroes.Controllers
             userModel.ListOfInterestingTasks = userFullData.ListOfInterestingTasks;
             userModel.ListOfPostingsBeingOffered = userFullData.ListOfPostingsBeingOffered;
             userModel.DateCreated = userFullData.User.DateCreated;
-            userModel.AllowEditProfile = HttpContext.Session.GetInt32("userid").HasValue && id == HttpContext.Session.GetInt32("userid").Value;
             userModel.Image = userFullData.User.Image;
 
+            // Allow editing profile only if the user being retrieved is also the logged in user
+            userModel.AllowEditProfile = HttpContext.Session.GetInt32("userid").HasValue && id == HttpContext.Session.GetInt32("userid").Value;
+
+            // Return User Details view with the corresponding user model
             return View(userModel);
+        }
+
+        // Edit User Profile action
+        public ActionResult EditUserProfile(UserProfileModel model)
+        {
+            // Update the User record in the database with new data and information
+            _editUserProfileCommandHandler.Handle(new EditUserProfileCommand(HttpContext.Session.GetInt32("userid").Value, model.FirstName, model.LastName, model.Email, model.City, model.Province, model.Description));
+
+            // Redirect to the User Profile view
+            return RedirectToAction("Index");
         }
     }
 }

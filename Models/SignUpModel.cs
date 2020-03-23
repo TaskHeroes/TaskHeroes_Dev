@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace TaskHeroes.Models
 {
+	// Sign Up model for sign up view and actions
 	public class SignUpModel
 	{
 		public string Username { get; set; }
