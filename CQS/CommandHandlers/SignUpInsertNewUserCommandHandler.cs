@@ -23,6 +23,9 @@ namespace TaskHeroes.CQS.CommandHandlers
 			// Set timestamp to current time
 			command.NewUser.DateCreated = DateTime.Now;
 
+			// Set image path
+			command.NewUser.Image = "~/Resources/Images/UserProfile/profile_picture_" + command.NewUser.Id + ".jpg";
+
 			// Add the record to the Users table and commit changes
 			_dbContext.Users.Add(command.NewUser);
 			_dbContext.SaveChanges();
