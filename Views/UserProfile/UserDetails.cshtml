@@ -1,13 +1,10 @@
 ﻿@model UserProfileModel
 @using Microsoft.AspNetCore.Http
 @{
-	Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
-	ViewData["Title"] = "UserDetails";
-
-	var profile_image = "~/Resources/Images/UserProfile/profile_picture_3.jpg";
-	var user_review = "4";
-
-	var userId = Context.Session.GetString("userid");
+    ViewData["Title"] = "UserDetails";
+    var default_profile_picture = "~/Resources/Images/UserProfile/proflie_picture_default.png";
+    var user_review = 4;
+    var userId = Context.Session.GetString("userid");
     if (userId != null)
         Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
@@ -16,36 +13,43 @@
 <link rel="stylesheet" href="~/css/UserProfile/UserProfile.css" />
 
 <!-- Hidden fields for values that need to be passed into javascript -->
-<input type="hidden" id="user_review" name="user_review" value=@user_review />
+<input type="hidden" id="user_review" name="user_review" value=@Model.Rating />
 <h1>User Profile Page</h1>
 <div class="leftcolumn">
-	<div class="card">
-		<img src="@Url.Content(profile_image)" alt="John" style="width:100%">
-		<h1>@(Model.FirstName + " " + Model.LastName)</h1>
-		<form id="user_card_form">
-			<div class="form-group mx-auto row margin-bottom">
-				<textarea id="description" rows="4" readonly>
+    <div class="card">
+        @if (userId != null)
+        {
+            <img src="@Url.Content(Model.Image)" alt="User Image" style="width:100%">
+        }
+        else
+        {
+            <img src="@Url.Content(default_profile_picture)" alt="User Image" style="width:100%">
+        }
+        <h1>@(Model.FirstName + " " + Model.LastName)</h1>
+        <form id="user_card_form">
+            <div class="form-group mx-auto row margin-bottom">
+                <textarea id="description" rows="4" readonly>
                         @Model.Description
                     </textarea>
-			</div>
-			<div class="form-group row mx-auto margin-bottom">
-				<label for="user_rating" class="col-form-label">User Rating</label>
-				<div class="col-sm-7">
-					<div class="stars-outer">
-						<div class="stars-inner"></div>
-					</div>
-				</div>
-			</div>
-			<div class="form-group row mx-auto">
-				<label for="member_since" class="col-form-label">Member Since</label>
-				<div class="col-sm-7">
-					<input type="datetime" class="form-control-plaintext" id="member_since" value=@Model.DateCreated.Date>
-				</div>
-			</div>
+            </div>
+            <div class="form-group row mx-auto margin-bottom">
+                <label for="user_rating" class="col-form-label">User Rating</label>
+                <div class="col-sm-7">
+                    <div class="stars-outer">
+                        <div class="stars-inner"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row mx-auto">
+                <label for="member_since" class="col-form-label">Member Since</label>
+                <div class="col-sm-7">
+                    <input type="datetime" class="form-control-plaintext" id="member_since" value=@Model.DateCreated.Date>
+                </div>
+            </div>
 
-			<p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
-		</form>
-	</div>
+            <p><button id="contact_btn">Contact @(Model.FirstName + " " + Model.LastName)</button></p>
+        </form>
+    </div>
 </div>
 
 <div class="rightcolumn">

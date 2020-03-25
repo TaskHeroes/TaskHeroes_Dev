@@ -3,6 +3,7 @@
 
 @{
     ViewData["Title"] = "Task Heroes";
+    var default_profile_picture = "~/Resources/Images/UserProfile/proflie_picture_default.png";
     var userId = Context.Session.GetString("userid");
     if (userId != null)
         Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
@@ -53,7 +54,15 @@
 
         <div class="container">
             <div class="box">
-                <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
+                @if (userId != null)
+                {
+                    <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
+                }
+                else
+                {
+                    <img src="@Url.Content(default_profile_picture)" alt="John" style="width:100%">
+
+                }
                 <h1>@(user.FirstName + " " + user.LastName)</h1>
                 <form id="user_card_form">
                     <div class="form-group mx-auto row margin-bottom">
