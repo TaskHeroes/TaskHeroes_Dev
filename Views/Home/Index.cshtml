@@ -5,6 +5,7 @@
     ViewData["Title"] = "Task Heroes";
     var default_profile_picture = "~/Resources/Images/UserProfile/proflie_picture_default.png";
     var userId = Context.Session.GetString("userid");
+    var userType = Context.Session.GetInt32("usertype");
     if (userId != null)
         Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
 }
@@ -18,76 +19,82 @@
     <!-------------------------------- LIST OF TASKS ------------------------------------------->
     @foreach (var task in Model.ListOfPostings)
     {
-        <div class="container">
-            <div class="box">
-                <img src="~/Resources/Images/TaskDetail/task_icon.png" alt="avatar" style="width:100%">
-                <h2>@task.Title</h2>
-                <form id="task_info_form">
-                    <div class="form-group row margin-bottom">
-                        <label for="work_type" class="col-sm-5 col-form-label">Work Type</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control-plaintext" id="work_type" value=@task.JobType readonly>
+        @if (userType == 1 || userType == null)
+        {
+            <div class="container">
+                <div class="box">
+                    <img src="~/Resources/Images/TaskDetail/task_icon.png" alt="avatar" style="width:100%">
+                    <h2>@task.Title</h2>
+                    <form id="task_info_form">
+                        <div class="form-group row margin-bottom">
+                            <label for="work_type" class="col-sm-5 col-form-label">Work Type</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control-plaintext" id="work_type" value=@task.JobType readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row margin-bottom">
-                        <label for="Offer" class="col-sm-5 col-form-label">Offer</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control-plaintext" id="offer" value="$@(task.MoneyOffer)" readonly>
+                        <div class="form-group row margin-bottom">
+                            <label for="Offer" class="col-sm-5 col-form-label">Offer</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control-plaintext" id="offer" value="$@(task.MoneyOffer)" readonly>
+                            </div>
                         </div>
-                    </div>
-                    <div class="form-group row margin-bottom">
-                        <label for="work_period" class="col-sm-5 col-form-label">Work Period</label>
-                        <div class="col-sm-7">
-                            <input type="text" class="form-control-plaintext" id="work_period" value=@task.WorkPeriod readonly>
+                        <div class="form-group row margin-bottom">
+                            <label for="work_period" class="col-sm-5 col-form-label">Work Period</label>
+                            <div class="col-sm-7">
+                                <input type="text" class="form-control-plaintext" id="work_period" value=@task.WorkPeriod readonly>
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="detail_btn" asp-controller="TaskDetail" asp-action="Details" asp-route-id=@task.Id>Task Detail</button>
-                </form>
+                        <button type="submit" class="btn btn-primary" id="detail_btn" asp-controller="TaskDetail" asp-action="Details" asp-route-id=@task.Id>Task Detail</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        }
     }
     <!------------------------------LIST OF USERS -------------------------------------------->
     @foreach (var user in Model.ListOfUsers)
     {
-        <!--Hidden fields to store user rating - used to display star rating on user card-->
-        <input type="hidden" id="user_rating@(user.Id)" name="user_review" value=@user.Rating />
+        @if (userType == 2 || userType == null)
+        {
+            <!--Hidden fields to store user rating - used to display star rating on user card-->
+            <input type="hidden" id="user_rating@(user.Id)" name="user_review" value=@user.Rating />
 
-        <div class="container">
-            <div class="box">
-                @if (userId != null)
-                {
-                    <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
-                }
-                else
-                {
-                    <img src="@Url.Content(default_profile_picture)" alt="John" style="width:100%">
+            <div class="container">
+                <div class="box">
+                    @if (userId != null)
+                    {
+                        <img src="@Url.Content(user.Image)" alt="John" style="width:100%">
+                    }
+                    else
+                    {
+                        <img src="@Url.Content(default_profile_picture)" alt="John" style="width:100%">
 
-                }
-                <h1>@(user.FirstName + " " + user.LastName)</h1>
-                <form id="user_card_form">
-                    <div class="form-group mx-auto row margin-bottom">
-                        <textarea id="description" readonly>
+                    }
+                    <h1>@(user.FirstName + " " + user.LastName)</h1>
+                    <form id="user_card_form">
+                        <div class="form-group mx-auto row margin-bottom">
+                            <textarea id="description" readonly>
                                 @user.Description
                         </textarea>
-                    </div>
-                    <div class="form-group row mx-auto margin-bottom">
-                        <label for="user_rating" class="col-form-label">User Rating</label>
-                        <div class="col-sm-7">
-                            <div class="stars-outer">
-                                <div class="stars-inner" id="star@(user.Id)"></div>
+                        </div>
+                        <div class="form-group row mx-auto margin-bottom">
+                            <label for="user_rating" class="col-form-label">User Rating</label>
+                            <div class="col-sm-7">
+                                <div class="stars-outer">
+                                    <div class="stars-inner" id="star@(user.Id)"></div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="form-group row mx-auto">
-                        <label for="member_since" class="col-form-label">Member Since</label>
-                        <div class="col-sm-7">
-                            <input type="datetime" class="form-control-plaintext" id="member_since" value=@user.DateCreated>
+                        <div class="form-group row mx-auto">
+                            <label for="member_since" class="col-form-label">Member Since</label>
+                            <div class="col-sm-7">
+                                <input type="datetime" class="form-control-plaintext" id="member_since" value=@user.DateCreated>
+                            </div>
                         </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary" id="user_into_btn" asp-controller="UserProfile" asp-action="UserDetails" asp-route-id=@user.Id>Hero Profile</button>
-                </form>
+                        <button type="submit" class="btn btn-primary" id="user_into_btn" asp-controller="UserProfile" asp-action="UserDetails" asp-route-id=@user.Id>Hero Profile</button>
+                    </form>
+                </div>
             </div>
-        </div>
+        }
     }
 
 </div>

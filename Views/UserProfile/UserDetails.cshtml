@@ -3,7 +3,6 @@
 @{
     ViewData["Title"] = "UserDetails";
     var default_profile_picture = "~/Resources/Images/UserProfile/proflie_picture_default.png";
-    var user_review = 4;
     var userId = Context.Session.GetString("userid");
     if (userId != null)
         Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
