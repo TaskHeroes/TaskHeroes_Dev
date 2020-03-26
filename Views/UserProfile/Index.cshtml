@@ -1,11 +1,9 @@
 ﻿@model UserProfileModel
 @using Microsoft.AspNetCore.Http
 @{
-    Layout = "~/Views/Shared/_Layout_LogIn.cshtml";
     ViewData["Title"] = "UserProfile";
 
-    var profile_image = "~/Resources/Images/UserProfile/profile_picture_3.jpg";
-    var user_review = "4";
+    var default_profile_picture = "~/Resources/Images/UserProfile/proflie_picture_default.png";
 
     var userId = Context.Session.GetString("userid");
     if (userId != null)
@@ -16,11 +14,18 @@
 <link rel="stylesheet" href="~/css/UserProfile/UserProfile.css" />
 
 <!-- Hidden fields for values that need to be passed into javascript -->
-<input type="hidden" id="user_review" name="user_review" value=@user_review />
+<input type="hidden" id="user_review" name="user_review" value=@Model.Rating />
 <h1>User Profile Page</h1>
 <div class="leftcolumn">
     <div class="card">
-        <img src="@Url.Content(profile_image)" alt="John" style="width:100%">
+        @if (userId != null)
+        {
+            <img src="@Url.Content(Model.Image)" alt="User Image" style="width:100%">
+        }
+        else
+        {
+            <img src="@Url.Content(default_profile_picture)" alt="User Image" style="width:100%">
+        }
         <h1>@(Model.FirstName + " " + Model.LastName)</h1>
         <form id="user_card_form">
             <div class="form-group mx-auto row margin-bottom">
@@ -92,11 +97,6 @@
                 <label for="province" class="col-sm-2 col-form-label">Province</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control-plaintext" id="province" value=@Model.Province>
-                </div>
-            </div>
-            <div class="form-group row">
-                <div class="col-sm-10">
-                    <button id="save_btn" type="submit" class="btn btn-primary">Save</button>
                 </div>
             </div>
         </form>
